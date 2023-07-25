@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
 )
 
 // HealthGetLivenessProbeHandler Handler for GET /_livenessProbe

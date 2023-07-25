@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	prometheusmetrics "github.com/nvsco/wallet/tools/prometheus-metrics"
+	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
 	"github.com/sirupsen/logrus"
 )
 

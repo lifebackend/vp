@@ -20,8 +20,8 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/general"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
 )
 
 // NewWalletAPI creates a new Wallet instance

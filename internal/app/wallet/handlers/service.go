@@ -3,17 +3,17 @@ package handlers
 import (
 	"context"
 
-	kafkasenderservice "github.com/nvsco/wallet/internal/app/common/services/kafka-sender-service"
-	"github.com/nvsco/wallet/internal/app/wallet/config"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations"
+	kafkasenderservice "github.com/lifebackend/vp/internal/app/common/services/kafka-sender-service"
+	"github.com/lifebackend/vp/internal/app/wallet/config"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime"
 
-	"github.com/nvsco/wallet/pkg/scope"
-	prometheusmetrics "github.com/nvsco/wallet/tools/prometheus-metrics"
-	"github.com/nvsco/wallet/tools/run"
+	"github.com/lifebackend/vp/pkg/scope"
+	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
+	"github.com/lifebackend/vp/tools/run"
 
 	"github.com/sirupsen/logrus"
 )

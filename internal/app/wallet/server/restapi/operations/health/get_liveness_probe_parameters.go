@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/nvsco/wallet/pkg/scope"
+	"github.com/lifebackend/vp/pkg/scope"
 )
 
 // NewGetLivenessProbeParams creates a new GetLivenessProbeParams object

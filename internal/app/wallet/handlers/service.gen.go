@@ -4,9 +4,9 @@
 package handlers
 
 import (
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/general"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
 )
 
 func AddDefaultHandlers(api *operations.WalletAPI, h *Handlers) {

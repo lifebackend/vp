@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
 )
 
 // GeneralGetAppCodesHandler Handler for GET /app-codes

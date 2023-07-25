@@ -5,11 +5,11 @@ import (
 	"log"
 
 	"github.com/evalphobia/logrus_sentry"
-	"github.com/nvsco/wallet/pkg/scope"
-	prometheusmetrics "github.com/nvsco/wallet/tools/prometheus-metrics"
+	"github.com/lifebackend/vp/pkg/scope"
+	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
 
-	"github.com/nvsco/wallet/internal/app/wallet/config"
-	"github.com/nvsco/wallet/internal/app/wallet/handlers"
+	"github.com/lifebackend/vp/internal/app/wallet/config"
+	"github.com/lifebackend/vp/internal/app/wallet/handlers"
 	"github.com/sirupsen/logrus"
 )
 

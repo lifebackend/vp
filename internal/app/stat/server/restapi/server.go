@@ -32,8 +32,8 @@ import (
 	flags "github.com/jessevdk/go-flags"
 	"golang.org/x/net/netutil"
 
-	"github.com/nvsco/wallet/internal/app/stat/server/restapi/operations"
-	prometheusmetrics "github.com/nvsco/wallet/tools/prometheus-metrics"
+	"github.com/lifebackend/vp/internal/app/stat/server/restapi/operations"
+	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
 )
 
 const (

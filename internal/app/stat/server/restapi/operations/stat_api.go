@@ -19,8 +19,8 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/nvsco/wallet/internal/app/stat/server/restapi/operations/general"
-	"github.com/nvsco/wallet/internal/app/stat/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/stat/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/stat/server/restapi/operations/health"
 )
 
 // NewStatAPI creates a new Stat instance

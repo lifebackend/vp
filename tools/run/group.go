@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/nvsco/wallet/tools/signals"
+	"github.com/lifebackend/vp/tools/signals"
 	"github.com/sirupsen/logrus"
 )
 

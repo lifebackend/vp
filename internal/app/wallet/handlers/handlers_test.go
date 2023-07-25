@@ -3,7 +3,7 @@ package handlers
 import (
 	"testing"
 
-	"github.com/nvsco/wallet/internal/testutils"
+	"github.com/lifebackend/vp/internal/testutils"
 	"github.com/stretchr/testify/suite"
 )
 

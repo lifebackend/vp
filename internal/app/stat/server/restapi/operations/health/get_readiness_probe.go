@@ -12,8 +12,8 @@ import (
 	"time"
 
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/nvsco/wallet/pkg/scope"
-	prometheusmetrics "github.com/nvsco/wallet/tools/prometheus-metrics"
+	"github.com/lifebackend/vp/pkg/scope"
+	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
 	"github.com/sirupsen/logrus"
 )
 

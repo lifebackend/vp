@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/nvsco/wallet/internal/utils"
+	"github.com/lifebackend/vp/internal/utils"
 	"github.com/subosito/gotenv"
 )
 

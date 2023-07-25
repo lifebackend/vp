@@ -1,4 +1,4 @@
-module github.com/nvsco/wallet
+module github.com/lifebackend/vp
 
 go 1.19
 

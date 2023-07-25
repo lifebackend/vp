@@ -12,9 +12,9 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/general"
-	"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
 )
 
 func configureFlags(api *operations.WalletAPI) {
@@ -43,12 +43,12 @@ func configureAPI(api *operations.WalletAPI) http.Handler {
 	api.JSONProducer = runtime.JSONProducer()
 
 	/* default handlers import
-		"github.com/nvsco/wallet/internal/app/wallet/server/client"
-		"github.com/nvsco/wallet/internal/app/wallet/server/models"
-		"github.com/nvsco/wallet/internal/app/wallet/server/restapi"
-		"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/general"
-		"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations/health"
-		"github.com/nvsco/wallet/internal/app/wallet/server/restapi/operations"
+		"github.com/lifebackend/vp/internal/app/wallet/server/client"
+		"github.com/lifebackend/vp/internal/app/wallet/server/models"
+		"github.com/lifebackend/vp/internal/app/wallet/server/restapi"
+		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
+		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
+		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
 	  default handlers import */
 
 	/* default handlers declaration

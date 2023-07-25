@@ -5,10 +5,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/nvsco/wallet/internal/app/wallet/config"
+	"github.com/lifebackend/vp/internal/app/wallet/config"
 
-	"github.com/nvsco/wallet/internal/walleterror"
-	"github.com/nvsco/wallet/pkg/scope"
+	"github.com/lifebackend/vp/internal/walleterror"
+	"github.com/lifebackend/vp/pkg/scope"
 )
 
 const (

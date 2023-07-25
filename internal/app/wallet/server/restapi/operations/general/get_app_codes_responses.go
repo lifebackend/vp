@@ -9,10 +9,10 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
-	"github.com/nvsco/wallet/internal/walleterror"
+	"github.com/lifebackend/vp/internal/walleterror"
 	"github.com/sirupsen/logrus"
 
-	"github.com/nvsco/wallet/internal/app/wallet/server/models"
+	"github.com/lifebackend/vp/internal/app/wallet/server/models"
 )
 
 // GetAppCodesOKCode is the HTTP code returned for type GetAppCodesOK
