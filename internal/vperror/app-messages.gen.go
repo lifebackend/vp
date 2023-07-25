@@ -1,4 +1,4 @@
-package walleterror
+package vperror
 
 import (
 	"fmt"

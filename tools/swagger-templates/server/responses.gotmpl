@@ -202,7 +202,7 @@ func ({{ .ReceiverName }} *{{ pascalize .Name }}) FromErr(err error) *{{ pascali
 }
 
 // WithError adds the Error payload to the {{ humanize .Name }} response
-func ({{ .ReceiverName }} *{{ pascalize .Name }}) FromMessage(gaemblaErr *walleterror.AppMessage) *{{ pascalize .Name }} {
+func ({{ .ReceiverName }} *{{ pascalize .Name }}) FromMessage(gaemblaErr *vperror.AppMessage) *{{ pascalize .Name }} {
 	{{ .ReceiverName }}.Payload =  &models.ErrorMessage{
 		Attributes: gaemblaErr.Attributes,
 		Code:       gaemblaErr.Code,
@@ -279,7 +279,7 @@ import (
   "github.com/go-openapi/validate"
   "github.com/go-openapi/runtime/middleware"
   "github.com/sirupsen/logrus"
-  "github.com/lifebackend/vp/internal/walleterror"
+  "github.com/lifebackend/vp/internal/vperror"
 
   {{ imports .DefaultImports }}
   {{ imports .Imports }}

@@ -12,16 +12,16 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
-	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
-	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
+	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations"
+	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/general"
+	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/health"
 )
 
-func configureFlags(api *operations.WalletAPI) {
+func configureFlags(api *operations.VpAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
 }
 
-func configureAPI(api *operations.WalletAPI) http.Handler {
+func configureAPI(api *operations.VpAPI) http.Handler {
 	// configure the api here
 	api.ServeError = errors.ServeError
 
@@ -43,12 +43,12 @@ func configureAPI(api *operations.WalletAPI) http.Handler {
 	api.JSONProducer = runtime.JSONProducer()
 
 	/* default handlers import
-		"github.com/lifebackend/vp/internal/app/wallet/server/client"
-		"github.com/lifebackend/vp/internal/app/wallet/server/models"
-		"github.com/lifebackend/vp/internal/app/wallet/server/restapi"
-		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/general"
-		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations/health"
-		"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
+		"github.com/lifebackend/vp/internal/app/vp/server/client"
+		"github.com/lifebackend/vp/internal/app/vp/server/models"
+		"github.com/lifebackend/vp/internal/app/vp/server/restapi"
+		"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/general"
+		"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/health"
+		"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations"
 	  default handlers import */
 
 	/* default handlers declaration

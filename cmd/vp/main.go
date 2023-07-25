@@ -42,20 +42,6 @@ func main() {
 		logger.Fatalln(err)
 	}
 
-	if cfg.SentryEnabled {
-		// DSN passing via SENTRY_ENV variable
-		hook, err := logrus_sentry.NewAsyncSentryHook("", []logrus.Level{
-			logrus.PanicLevel,
-			logrus.FatalLevel,
-			logrus.ErrorLevel,
-		})
-
-		if err == nil {
-			hook.StacktraceConfiguration.Enable = true
-			logger.Logger.Hooks.Add(hook)
-		}
-	}
-
 	sScope.Logger().Println("starting")
 
 	if err := server.Serve(sScope); err != nil {

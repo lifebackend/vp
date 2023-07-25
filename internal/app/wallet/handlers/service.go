@@ -3,7 +3,6 @@ package handlers
 import (
 	"context"
 
-	kafkasenderservice "github.com/lifebackend/vp/internal/app/common/services/kafka-sender-service"
 	"github.com/lifebackend/vp/internal/app/wallet/config"
 	"github.com/lifebackend/vp/internal/app/wallet/server/restapi"
 	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
@@ -19,8 +18,7 @@ import (
 )
 
 type Server struct {
-	httpServer   *restapi.Server
-	kafkaService *kafkasenderservice.KafkaSenderService
+	httpServer *restapi.Server
 }
 
 type Dependencies struct{}
@@ -33,12 +31,6 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	}
 
 	logger.Info("Initializing services...")
-
-	kafkaService, err := kafkasenderservice.NewKafkaSender(cfg)
-	if err != nil {
-		return nil, nil, err
-	}
-	//eventSendingService := eventsendingservice.NewEventSendingService(kafkaService, cfg.KafkaCoreTopic, serviceName)
 
 	h := NewHandlers(
 		cfg.ImageTag,
@@ -62,8 +54,7 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	server.EnabledListeners = []string{"http"}
 
 	return &Server{
-		httpServer:   server,
-		kafkaService: kafkaService,
+		httpServer: server,
 	}, h, nil
 }
 

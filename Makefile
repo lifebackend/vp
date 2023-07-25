@@ -9,7 +9,7 @@ GOLANGCI_VERSION ?= v1.45.2
 -include .env
 -include .env.local
 
-APPS ?= wallet stat
+APPS ?= vp
 
 
 SWAGGER_YAML_FILE ?= api/swagger.yml
@@ -46,11 +46,9 @@ up: ##
 	docker-compose -f docker-compose.yml pull
 	docker-compose -f docker-compose.yml up
 
-up-wallet: ##
-	docker-compose -f docker-compose.yml up wallet
 
-up-stat: ##
-	docker-compose -f docker-compose.yml up stat
+up-vp: ##
+	docker-compose -f docker-compose.yml up vp
 
 up-build: ##
 	docker-compose up --build --remove-orphans --force-recreate
@@ -105,7 +103,7 @@ endif
 		--exclude-main \
 		-P models.Principal \
 		-t $(PWD)/internal/app/$(SERVICE_NAME)/server
-	@docker run --rm  -v $(PWD):$(PWD) -w $(PWD) plavreshin/goimports:latest -e -w internal/app/$(SERVICE_NAME)/server
+	@docker run --rm  --platform linux/amd64 -v $(PWD):$(PWD) -w $(PWD) plavreshin/goimports:latest -e -w internal/app/$(SERVICE_NAME)/server
 
 
 gen-servers:

@@ -44,7 +44,7 @@ type templateItem struct {
 
 func main() {
 	yamlFilePath := "api/messages.yml"
-	targetDir := "internal/walleterror/"
+	targetDir := "internal/vperror/"
 	targetFilename := "app-messages.gen.go"
 	targetFullFilename := filepath.Join(targetDir, targetFilename)
 
@@ -177,7 +177,7 @@ func getAttributes(value string, knownTypes map[string]string, defaultType strin
 
 var (
 	packageTemplate = template.Must(template.New("").Parse(tpl))
-	tpl             = `package walleterror
+	tpl             = `package vperror
 
 import (
 	"fmt"

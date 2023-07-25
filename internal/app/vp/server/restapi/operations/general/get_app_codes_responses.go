@@ -9,10 +9,10 @@ import (
 	"net/http"
 
 	"github.com/go-openapi/runtime"
-	"github.com/lifebackend/vp/internal/walleterror"
+	"github.com/lifebackend/vp/internal/vperror"
 	"github.com/sirupsen/logrus"
 
-	"github.com/lifebackend/vp/internal/app/wallet/server/models"
+	"github.com/lifebackend/vp/internal/app/vp/server/models"
 )
 
 // GetAppCodesOKCode is the HTTP code returned for type GetAppCodesOK
@@ -122,7 +122,7 @@ func (o *GetAppCodesInternalServerError) FromErr(err error) *GetAppCodesInternal
 }
 
 // WithError adds the Error payload to the get app codes internal server error response
-func (o *GetAppCodesInternalServerError) FromMessage(gaemblaErr *walleterror.AppMessage) *GetAppCodesInternalServerError {
+func (o *GetAppCodesInternalServerError) FromMessage(gaemblaErr *vperror.AppMessage) *GetAppCodesInternalServerError {
 	o.Payload = &models.ErrorMessage{
 		Attributes: gaemblaErr.Attributes,
 		Code:       gaemblaErr.Code,

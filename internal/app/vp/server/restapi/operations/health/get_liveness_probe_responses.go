@@ -11,7 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/sirupsen/logrus"
 
-	"github.com/lifebackend/vp/internal/app/wallet/server/models"
+	"github.com/lifebackend/vp/internal/app/vp/server/models"
 )
 
 // GetLivenessProbeOKCode is the HTTP code returned for type GetLivenessProbeOK
