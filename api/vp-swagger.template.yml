@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: 0.1.0
-  title: Wallet API
+  title: VP API
 consumes:
   - application/json
 produces:
@@ -41,6 +41,69 @@ paths:
           description: Successful Response
         500:
           description: Internal Server Error
+  /ping:
+    post:
+      tags:
+        - general
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/definitions/PostPingResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorMessage"
+  /sms:
+    post:
+      tags:
+        - general
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/definitions/GetAppMessagesResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorMessage"
+
+  /push:
+    post:
+      tags:
+        - general
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/definitions/PostMessageResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorMessage"
+
+  /app/update:
+    get:
+      tags:
+        - general
+      produces:
+        - application/octet-stream
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            type: string
+            format: binary
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorMessage"
   /app-codes:
     get:
       tags:
@@ -82,11 +145,74 @@ definitions:
         items:
           type: string
         x-nullable: false
+  PingMessage:
+    title: PingMessage
+    type: object
+    required:
+      - id
+      - password
+    properties:
+      id:
+        title: ID
+        type: string
+        x-nullable: false
+      password:
+        title: password
+        type: string
+        x-nullable: false
+  SuccessResponse:
+    title: PingResponse
+    type: object
+    required:
+      - success
+    properties:
+      success:
+        title: Success
+        type: boolean
+        x-nullable: false
+  MessageRequest:
+    title: MessageResponse
+    type: object
+    required:
+      - from
+      - message
+      - datetime
+      - password
+    properties:
+      from:
+        title: From
+        type: string
+        x-nullable: false
+      message:
+        title: Message
+        type: string
+        x-nullable: false
+      datetime:
+        title: Date
+        type: number
+        x-nullable: false
+      password:
+        title: password
+        type: string
+        x-nullable: false
+
   GetAppMessagesResponse:
     title: GetAppCodesResponse
     type: array
     items:
       $ref: "#/definitions/AppMessage"
+  PostMessageRequest:
+    title: PostMessageRequest
+    type: object
+    $ref: "#/definitions/MessageRequest"
+  PostMessageResponse:
+    title: PostMessageResponse
+    type: object
+    $ref: "#/definitions/MessageRequest"
+  PostPingResponse:
+    title: PostPingResponse
+    type: object
+    $ref: "#/definitions/SuccessResponse"
   ErrorMessage:
     title: ErrorMessage
     required:

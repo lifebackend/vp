@@ -3,9 +3,11 @@ package handlers
 import (
 	"context"
 
-	"github.com/lifebackend/vp/internal/app/wallet/config"
-	"github.com/lifebackend/vp/internal/app/wallet/server/restapi"
-	"github.com/lifebackend/vp/internal/app/wallet/server/restapi/operations"
+	"github.com/lifebackend/vp/internal/app/vp/config"
+	"github.com/lifebackend/vp/internal/app/vp/server/restapi"
+	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime"
@@ -19,6 +21,7 @@ import (
 
 type Server struct {
 	httpServer *restapi.Server
+	db         *mongo.Client
 }
 
 type Dependencies struct{}
@@ -32,12 +35,23 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 
 	logger.Info("Initializing services...")
 
+	//kafkaService, err := kafkasenderservice.NewKafkaSender(cfg)
+	//if err != nil {
+	//	return nil, nil, err
+	//}
+	//eventSendingService := eventsendingservice.NewEventSendingService(kafkaService, cfg.KafkaCoreTopic, serviceName)
+
+	client, err := mongo.Connect(scope.Ctx, options.Client().ApplyURI(cfg.MongoDSN))
+	if err != nil {
+		return nil, nil, err
+	}
+
 	h := NewHandlers(
 		cfg.ImageTag,
 	)
 
 	logger.Info("Initializing API...")
-	api := operations.NewWalletAPI(swaggerSpec)
+	api := operations.NewVpAPI(swaggerSpec)
 
 	// add API routes
 	AddDefaultHandlers(api, h)
@@ -55,6 +69,7 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 
 	return &Server{
 		httpServer: server,
+		db:         client,
 	}, h, nil
 }
 

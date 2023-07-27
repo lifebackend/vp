@@ -10,7 +10,7 @@ services:
     volumes:
       - .:$PWD
     working_dir: $PWD
-    command: /bin/bash -c "go mod download && ls -la cmd/core && cd cmd/core && pwd && realize start"
+    command: /bin/bash -c "go mod download && ls -la cmd/vp && cd cmd/vp && pwd && go run main.go"
     env_file:
       - .env
     environment:
@@ -28,6 +28,12 @@ services:
       retries: 5
     ports:
       - $VP_SERVICE_PORT:$VP_SERVICE_PORT
+  backend-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+
 
 volumes:
   esdata:

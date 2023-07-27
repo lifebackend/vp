@@ -38,8 +38,8 @@ func NewMetrics() *Metrics {
 		version: prometheus.NewCounterVec(
 			// nolint:exhaustivestruct,promlinter
 			prometheus.CounterOpts{
-				Name: "wallet_pod_version_count",
-				Help: "Wallet pod version count",
+				Name: "vp_pod_version_count",
+				Help: "VP pod version count",
 			},
 			[]string{"version"},
 		),

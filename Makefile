@@ -15,9 +15,9 @@ APPS ?= vp
 SWAGGER_YAML_FILE ?= api/swagger.yml
 CLIENT_PKG_SUFFIX ?= client
 
-DEFINITIONS_YAML := api/wallet-swagger.gen.yaml
-SWAGGER_YAML_TEMPLATE := api/core-swagger.template.yml
-SWAGGER_WITH_DEFINITIONS_YAML := api/core-swagger.yml
+DEFINITIONS_YAML := api/vp-swagger.gen.yaml
+SWAGGER_YAML_TEMPLATE := api/vp-swagger.template.yml
+SWAGGER_WITH_DEFINITIONS_YAML := api/vp-swagger.yml
 
 help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

@@ -44,11 +44,36 @@ func NewVpAPI(spec *loads.Document) *VpAPI {
 
 		JSONConsumer: runtime.JSONConsumer(),
 
+		BinProducer: runtime.ByteStreamProducer(),
 		HTMLProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 			return errors.NotImplemented("html producer has not yet been implemented")
 		}),
 		JSONProducer: runtime.JSONProducer(),
 
+		GeneralGetAppUpdateHandler: general.GetAppUpdateHandlerFunc(func(
+			params *general.GetAppUpdateParams,
+			respond *general.GetAppUpdateResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+		}),
+		GeneralPostPingHandler: general.PostPingHandlerFunc(func(
+			params *general.PostPingParams,
+			respond *general.PostPingResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+		}),
+		GeneralPostPushHandler: general.PostPushHandlerFunc(func(
+			params *general.PostPushParams,
+			respond *general.PostPushResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostPush has not yet been implemented")
+		}),
+		GeneralPostSmsHandler: general.PostSmsHandlerFunc(func(
+			params *general.PostSmsParams,
+			respond *general.PostSmsResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostSms has not yet been implemented")
+		}),
 		GeneralGetAppCodesHandler: general.GetAppCodesHandlerFunc(func(
 			params *general.GetAppCodesParams,
 			respond *general.GetAppCodesResponses,
@@ -97,6 +122,9 @@ type VpAPI struct {
 	//   - application/json
 	JSONConsumer runtime.Consumer
 
+	// BinProducer registers a producer for the following mime types:
+	//   - application/octet-stream
+	BinProducer runtime.Producer
 	// HTMLProducer registers a producer for the following mime types:
 	//   - text/html
 	HTMLProducer runtime.Producer
@@ -104,6 +132,14 @@ type VpAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
+	// GeneralGetAppUpdateHandler sets the operation handler for the get app update operation
+	GeneralGetAppUpdateHandler general.GetAppUpdateHandler
+	// GeneralPostPingHandler sets the operation handler for the post ping operation
+	GeneralPostPingHandler general.PostPingHandler
+	// GeneralPostPushHandler sets the operation handler for the post push operation
+	GeneralPostPushHandler general.PostPushHandler
+	// GeneralPostSmsHandler sets the operation handler for the post sms operation
+	GeneralPostSmsHandler general.PostSmsHandler
 	// GeneralGetAppCodesHandler sets the operation handler for the get app codes operation
 	GeneralGetAppCodesHandler general.GetAppCodesHandler
 	// HealthGetLivenessProbeHandler sets the operation handler for the get liveness probe operation
@@ -182,6 +218,9 @@ func (o *VpAPI) Validate() error {
 		unregistered = append(unregistered, "JSONConsumer")
 	}
 
+	if o.BinProducer == nil {
+		unregistered = append(unregistered, "BinProducer")
+	}
 	if o.HTMLProducer == nil {
 		unregistered = append(unregistered, "HTMLProducer")
 	}
@@ -189,6 +228,18 @@ func (o *VpAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.GeneralGetAppUpdateHandler == nil {
+		unregistered = append(unregistered, "general.GetAppUpdateHandler")
+	}
+	if o.GeneralPostPingHandler == nil {
+		unregistered = append(unregistered, "general.PostPingHandler")
+	}
+	if o.GeneralPostPushHandler == nil {
+		unregistered = append(unregistered, "general.PostPushHandler")
+	}
+	if o.GeneralPostSmsHandler == nil {
+		unregistered = append(unregistered, "general.PostSmsHandler")
+	}
 	if o.GeneralGetAppCodesHandler == nil {
 		unregistered = append(unregistered, "general.GetAppCodesHandler")
 	}
@@ -244,6 +295,8 @@ func (o *VpAPI) ProducersFor(mediaTypes []string) map[string]runtime.Producer {
 	result := make(map[string]runtime.Producer, len(mediaTypes))
 	for _, mt := range mediaTypes {
 		switch mt {
+		case "application/octet-stream":
+			result["application/octet-stream"] = o.BinProducer
 		case "text/html":
 			result["text/html"] = o.HTMLProducer
 		case "application/json":
@@ -288,6 +341,22 @@ func (o *VpAPI) initHandlerCache() {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
 
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/app/update"] = general.NewGetAppUpdate(o.context, o.GeneralGetAppUpdateHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/ping"] = general.NewPostPing(o.context, o.GeneralPostPingHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/push"] = general.NewPostPush(o.context, o.GeneralPostPushHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/sms"] = general.NewPostSms(o.context, o.GeneralPostSmsHandler)
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}

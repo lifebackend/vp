@@ -37,6 +37,7 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 
 	api.JSONConsumer = runtime.JSONConsumer()
 
+	api.BinProducer = runtime.ByteStreamProducer()
 	api.HTMLProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
 		return errors.NotImplemented("html producer has not yet been implemented")
 	})
@@ -53,12 +54,56 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 
 	/* default handlers declaration
 	   // default handle functions
+	   api.GeneralGetAppUpdateHandler = general.GetAppUpdateHandlerFunc(h.GeneralGetAppUpdateHandler)
+	   api.GeneralPostPingHandler = general.PostPingHandlerFunc(h.GeneralPostPingHandler)
+	   api.GeneralPostPushHandler = general.PostPushHandlerFunc(h.GeneralPostPushHandler)
+	   api.GeneralPostSmsHandler = general.PostSmsHandlerFunc(h.GeneralPostSmsHandler)
 	   api.GeneralGetAppCodesHandler = general.GetAppCodesHandlerFunc(h.GeneralGetAppCodesHandler)
 	   api.HealthGetLivenessProbeHandler = health.GetLivenessProbeHandlerFunc(h.HealthGetLivenessProbeHandler)
 	   api.HealthGetReadinessProbeHandler = health.GetReadinessProbeHandlerFunc(h.HealthGetReadinessProbeHandler)
 	 default handlers declaration */
 
 	// Default handlers
+
+	/* default handler for /app/update-GET
+	   // GeneralGetAppUpdateHandler Handler for GET /app/update
+	   func (h *Handlers) GeneralGetAppUpdateHandler (
+	       params *general.GetAppUpdateParams,
+	       respond *general.GetAppUpdateResponses,
+	   ) middleware.Responder {
+	       return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+	   }
+	   default handler */
+
+	/* default handler for /ping-POST
+	   // GeneralPostPingHandler Handler for POST /ping
+	   func (h *Handlers) GeneralPostPingHandler (
+	       params *general.PostPingParams,
+	       respond *general.PostPingResponses,
+	   ) middleware.Responder {
+	       return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+	   }
+	   default handler */
+
+	/* default handler for /push-POST
+	   // GeneralPostPushHandler Handler for POST /push
+	   func (h *Handlers) GeneralPostPushHandler (
+	       params *general.PostPushParams,
+	       respond *general.PostPushResponses,
+	   ) middleware.Responder {
+	       return middleware.NotImplemented("operation general.PostPush has not yet been implemented")
+	   }
+	   default handler */
+
+	/* default handler for /sms-POST
+	   // GeneralPostSmsHandler Handler for POST /sms
+	   func (h *Handlers) GeneralPostSmsHandler (
+	       params *general.PostSmsParams,
+	       respond *general.PostSmsResponses,
+	   ) middleware.Responder {
+	       return middleware.NotImplemented("operation general.PostSms has not yet been implemented")
+	   }
+	   default handler */
 
 	/* default handler for /app-codes-GET
 	   // GeneralGetAppCodesHandler Handler for GET /app-codes
@@ -89,6 +134,42 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 	       return middleware.NotImplemented("operation health.GetReadinessProbe has not yet been implemented")
 	   }
 	   default handler */
+	// Handler for GET /app/update
+	if api.GeneralGetAppUpdateHandler == nil {
+		api.GeneralGetAppUpdateHandler = general.GetAppUpdateHandlerFunc(func(
+			params *general.GetAppUpdateParams,
+			respond *general.GetAppUpdateResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+		})
+	}
+	// Handler for POST /ping
+	if api.GeneralPostPingHandler == nil {
+		api.GeneralPostPingHandler = general.PostPingHandlerFunc(func(
+			params *general.PostPingParams,
+			respond *general.PostPingResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+		})
+	}
+	// Handler for POST /push
+	if api.GeneralPostPushHandler == nil {
+		api.GeneralPostPushHandler = general.PostPushHandlerFunc(func(
+			params *general.PostPushParams,
+			respond *general.PostPushResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostPush has not yet been implemented")
+		})
+	}
+	// Handler for POST /sms
+	if api.GeneralPostSmsHandler == nil {
+		api.GeneralPostSmsHandler = general.PostSmsHandlerFunc(func(
+			params *general.PostSmsParams,
+			respond *general.PostSmsResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostSms has not yet been implemented")
+		})
+	}
 	// Handler for GET /app-codes
 	if api.GeneralGetAppCodesHandler == nil {
 		api.GeneralGetAppCodesHandler = general.GetAppCodesHandlerFunc(func(

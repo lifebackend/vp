@@ -106,189 +106,88 @@ func init() {
           }
         }
       }
-    }
-  },
-  "definitions": {
-    "AppMessage": {
-      "type": "object",
-      "title": "AppMessage",
-      "required": [
-        "message",
-        "code",
-        "attributes"
-      ],
-      "properties": {
-        "attributes": {
-          "description": "attributes",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": false
-        },
-        "code": {
-          "type": "string",
-          "title": "Code",
-          "x-nullable": false
-        },
-        "message": {
-          "type": "string",
-          "title": "Message",
-          "x-nullable": false
-        }
-      }
     },
-    "ErrorMessage": {
-      "type": "object",
-      "title": "ErrorMessage",
-      "required": [
-        "message"
-      ],
-      "properties": {
-        "attributes": {
-          "description": "attributes",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-nullable": false
-        },
-        "code": {
-          "type": "string",
-          "title": "Code",
-          "x-nullable": false
-        },
-        "message": {
-          "type": "string",
-          "title": "Message",
-          "x-nullable": false
-        }
-      }
-    },
-    "GetAppMessagesResponse": {
-      "type": "array",
-      "title": "GetAppCodesResponse",
-      "items": {
-        "$ref": "#/definitions/AppMessage"
-      }
-    },
-    "LivenessProbe": {
-      "type": "object",
-      "title": "LivenessProbe",
-      "required": [
-        "tag"
-      ],
-      "properties": {
-        "components": {
-          "type": "array",
-          "title": "LivenessProbeComponents",
-          "items": {
-            "$ref": "#/definitions/LivenessProbeComponent"
-          }
-        },
-        "tag": {
-          "type": "string",
-          "title": "Tag",
-          "x-nullable": false
-        }
-      }
-    },
-    "LivenessProbeComponent": {
-      "type": "object",
-      "title": "LivenessProbeComponent",
-      "required": [
-        "name",
-        "status"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "x-nullable": false
-        },
-        "status": {
-          "type": "boolean",
-          "title": "Status",
-          "x-nullable": false
-        }
-      }
-    }
-  }
-}`))
-	FlatSwaggerJSON = json.RawMessage([]byte(`{
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json",
-    "text/html"
-  ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "swagger": "2.0",
-  "info": {
-    "title": "Wallet API",
-    "version": "0.1.0"
-  },
-  "paths": {
-    "/_livenessProbe": {
+    "/app/update": {
       "get": {
-        "description": "Liveness Probe",
         "produces": [
-          "application/json"
+          "application/octet-stream"
         ],
         "tags": [
-          "health"
+          "general"
         ],
-        "summary": "Liveness Probe",
-        "operationId": "getLivenessProbe",
         "responses": {
           "200": {
             "description": "Successful Response",
             "schema": {
-              "$ref": "#/definitions/LivenessProbe"
+              "type": "string",
+              "format": "binary"
             }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
           }
         }
       }
     },
-    "/_readinessProbe": {
-      "get": {
-        "description": "Readiness Probe",
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "health"
-        ],
-        "summary": "Readiness Probe",
-        "operationId": "getReadinessProbe",
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/app-codes": {
-      "get": {
-        "description": "Get list of application codes",
+    "/ping": {
+      "post": {
         "produces": [
           "application/json"
         ],
         "tags": [
           "general"
         ],
-        "summary": "Get List of Application Codes",
-        "operationId": "getAppCodes",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostPingResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/push": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostMessageResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/sms": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -407,6 +306,473 @@ func init() {
         "status": {
           "type": "boolean",
           "title": "Status",
+          "x-nullable": false
+        }
+      }
+    },
+    "MessageRequest": {
+      "type": "object",
+      "title": "MessageResponse",
+      "required": [
+        "from",
+        "message",
+        "datetime",
+        "password"
+      ],
+      "properties": {
+        "datetime": {
+          "type": "number",
+          "title": "Date",
+          "x-nullable": false
+        },
+        "from": {
+          "type": "string",
+          "title": "From",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string",
+          "title": "Device ID",
+          "x-nulable": false
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "title": "password",
+          "x-nullable": false
+        }
+      }
+    },
+    "PingMessage": {
+      "type": "object",
+      "title": "PingMessage",
+      "required": [
+        "id",
+        "password"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "title": "password",
+          "x-nullable": false
+        }
+      }
+    },
+    "PostMessageRequest": {
+      "type": "object",
+      "title": "PostMessageRequest",
+      "$ref": "#/definitions/MessageRequest"
+    },
+    "PostMessageResponse": {
+      "type": "object",
+      "title": "PostMessageResponse",
+      "$ref": "#/definitions/MessageRequest"
+    },
+    "PostPingResponse": {
+      "type": "object",
+      "title": "PostPingResponse",
+      "$ref": "#/definitions/SuccessResponse"
+    },
+    "SuccessResponse": {
+      "type": "object",
+      "title": "PingResponse",
+      "required": [
+        "success"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "Success",
+          "x-nullable": false
+        }
+      }
+    }
+  }
+}`))
+	FlatSwaggerJSON = json.RawMessage([]byte(`{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/html"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Wallet API",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/_livenessProbe": {
+      "get": {
+        "description": "Liveness Probe",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "health"
+        ],
+        "summary": "Liveness Probe",
+        "operationId": "getLivenessProbe",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/LivenessProbe"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/_readinessProbe": {
+      "get": {
+        "description": "Readiness Probe",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "health"
+        ],
+        "summary": "Readiness Probe",
+        "operationId": "getReadinessProbe",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/app-codes": {
+      "get": {
+        "description": "Get list of application codes",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
+        "summary": "Get List of Application Codes",
+        "operationId": "getAppCodes",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/GetAppMessagesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/app/update": {
+      "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/ping": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostPingResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/push": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostMessageResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
+    "/sms": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "general"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/GetAppMessagesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppMessage": {
+      "type": "object",
+      "title": "AppMessage",
+      "required": [
+        "message",
+        "code",
+        "attributes"
+      ],
+      "properties": {
+        "attributes": {
+          "description": "attributes",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": false
+        },
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "x-nullable": false
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        }
+      }
+    },
+    "ErrorMessage": {
+      "type": "object",
+      "title": "ErrorMessage",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "attributes": {
+          "description": "attributes",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-nullable": false
+        },
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "x-nullable": false
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        }
+      }
+    },
+    "GetAppMessagesResponse": {
+      "type": "array",
+      "title": "GetAppCodesResponse",
+      "items": {
+        "$ref": "#/definitions/AppMessage"
+      }
+    },
+    "LivenessProbe": {
+      "type": "object",
+      "title": "LivenessProbe",
+      "required": [
+        "tag"
+      ],
+      "properties": {
+        "components": {
+          "type": "array",
+          "title": "LivenessProbeComponents",
+          "items": {
+            "$ref": "#/definitions/LivenessProbeComponent"
+          }
+        },
+        "tag": {
+          "type": "string",
+          "title": "Tag",
+          "x-nullable": false
+        }
+      }
+    },
+    "LivenessProbeComponent": {
+      "type": "object",
+      "title": "LivenessProbeComponent",
+      "required": [
+        "name",
+        "status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "x-nullable": false
+        },
+        "status": {
+          "type": "boolean",
+          "title": "Status",
+          "x-nullable": false
+        }
+      }
+    },
+    "MessageRequest": {
+      "type": "object",
+      "title": "MessageResponse",
+      "required": [
+        "from",
+        "message",
+        "datetime",
+        "password"
+      ],
+      "properties": {
+        "datetime": {
+          "type": "number",
+          "title": "Date",
+          "x-nullable": false
+        },
+        "from": {
+          "type": "string",
+          "title": "From",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string",
+          "title": "Device ID",
+          "x-nulable": false
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "title": "password",
+          "x-nullable": false
+        }
+      }
+    },
+    "PingMessage": {
+      "type": "object",
+      "title": "PingMessage",
+      "required": [
+        "id",
+        "password"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "x-nullable": false
+        },
+        "password": {
+          "type": "string",
+          "title": "password",
+          "x-nullable": false
+        }
+      }
+    },
+    "PostMessageRequest": {
+      "type": "object",
+      "title": "PostMessageRequest",
+      "$ref": "#/definitions/MessageRequest"
+    },
+    "PostMessageResponse": {
+      "type": "object",
+      "title": "PostMessageResponse",
+      "$ref": "#/definitions/MessageRequest"
+    },
+    "PostPingResponse": {
+      "type": "object",
+      "title": "PostPingResponse",
+      "$ref": "#/definitions/SuccessResponse"
+    },
+    "SuccessResponse": {
+      "type": "object",
+      "title": "PingResponse",
+      "required": [
+        "success"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "Success",
           "x-nullable": false
         }
       }

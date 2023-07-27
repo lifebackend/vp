@@ -8,8 +8,8 @@ import (
 	"github.com/lifebackend/vp/pkg/scope"
 	prometheusmetrics "github.com/lifebackend/vp/tools/prometheus-metrics"
 
-	"github.com/lifebackend/vp/internal/app/wallet/config"
-	"github.com/lifebackend/vp/internal/app/wallet/handlers"
+	"github.com/lifebackend/vp/internal/app/vp/config"
+	"github.com/lifebackend/vp/internal/app/vp/handlers"
 	"github.com/sirupsen/logrus"
 )
 

@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/caarlos0/env/v8"
+	_ "github.com/caarlos0/env/v8"
 )
 
 // nolint:maligned
@@ -12,11 +13,7 @@ type Config struct {
 	Port         int    `env:"VP_SERVICE_PORT" envDefault:"9000"`
 	ExternalPort int    `env:"VP_EXTERNAL_PORT" envDefault:"9000"`
 	ExternalHost string `env:"VP_EXTERNAL_HOST"`
-
-	KafkaBrokers   string `env:"KAFKA_BROKERS" envDefault:"kafka:9090"`
-	KafkaCoreTopic string `env:"KAFKA_CORE_EVENTS_TOPIC" envDefault:"core.events"`
-
-	StatRealTimeDataTopic string `env:"STAT_REAL_TIME_DATA_TOPIC" envDefault:"stat.realtime"`
+	MongoDSN     string `env:"VP_DB_DSN" envDefault:"mongodb://backend-db:27017"`
 }
 
 func ReadConfig() (*Config, error) {

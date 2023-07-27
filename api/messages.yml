@@ -1,7 +1,6 @@
 types:
   err: error
   id: int64
-  walletID: int64
 defaultType: string
 messages:
   InternalAuthError:
