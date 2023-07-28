@@ -47,6 +47,12 @@ paths:
         - general
       produces:
         - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/PingMessage"
+          required: true
       responses:
         200:
           description: Successful Response
@@ -62,6 +68,12 @@ paths:
         - general
       produces:
         - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/PostMessageRequest"
+          required: true
       responses:
         200:
           description: Successful Response
@@ -78,6 +90,12 @@ paths:
         - general
       produces:
         - application/json
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/PostMessageRequest"
+          required: true
       responses:
         200:
           description: Successful Response

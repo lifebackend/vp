@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/lifebackend/vp/internal/app/vp/config"
+	"github.com/lifebackend/vp/internal/app/vp/message"
 	"github.com/lifebackend/vp/internal/app/vp/server/restapi"
 	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -20,8 +21,9 @@ import (
 )
 
 type Server struct {
-	httpServer *restapi.Server
-	db         *mongo.Client
+	httpServer     *restapi.Server
+	db             *mongo.Client
+	messageService *message.Service
 }
 
 type Dependencies struct{}
@@ -42,12 +44,15 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	//eventSendingService := eventsendingservice.NewEventSendingService(kafkaService, cfg.KafkaCoreTopic, serviceName)
 
 	client, err := mongo.Connect(scope.Ctx, options.Client().ApplyURI(cfg.MongoDSN))
+	messageService := message.NewService(client)
+
 	if err != nil {
 		return nil, nil, err
 	}
 
 	h := NewHandlers(
 		cfg.ImageTag,
+		messageService,
 	)
 
 	logger.Info("Initializing API...")
@@ -68,8 +73,9 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	server.EnabledListeners = []string{"http"}
 
 	return &Server{
-		httpServer: server,
-		db:         client,
+		httpServer:     server,
+		db:             client,
+		messageService: messageService,
 	}, h, nil
 }
 
