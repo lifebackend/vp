@@ -2,8 +2,10 @@ package message
 
 import (
 	"context"
+	"fmt"
 	"regexp"
 	"sync"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -209,9 +211,9 @@ func init() {
 		mapFields = make(map[string][]string)
 
 		mapFields[TypeIncomeSberFromSber] = []string{"body", "card", "time", "amount", "from", "balance"}
-		mapFields[TypeIncomeSberFromTinkoffOneStep] = []string{"body", "time", "amount", "balance"}
+		mapFields[TypeIncomeSberFromTinkoffOneStep] = []string{"body", "card", "time", "amount", "balance"}
 		mapFields[TypeIncomeSberFromTinkoffTwoStep] = []string{"body", "amount", "from"}
-		mapFields[TypeIncomeSberFromTinkoffSBPOneStep] = []string{"body", "time", "from", "amount"}
+		mapFields[TypeIncomeSberFromTinkoffSBPOneStep] = []string{"body", "card", "time", "from", "amount"}
 		mapFields[TypeIncomeSberFromTinkoffSBPTwoStep] = []string{"body", "amount", "balance"}
 		mapFields[TypeIncomeSberFromAlphaOneStep] = []string{"body", "card", "time", "amount", "balance"}
 		mapFields[TypeIncomeSberFromAlphaTwoStep] = []string{"body", "amount", "from"}
@@ -239,7 +241,7 @@ type Service struct {
 }
 
 func NewService(client *mongo.Client) *Service {
-	collection := client.Database("backend").Collection("messages")
+	collection := client.Database("database").Collection("messages")
 	return &Service{collection: collection}
 }
 
@@ -265,7 +267,8 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 		{"from", from},
 		{"typeMsg", typeMsg},
 		{"msg", m},
-		{"type", typeMsg},
+		{"type", t},
+		{"datetime", time.Now().Unix()},
 	}
 
 	_, err := s.collection.InsertOne(ctx, b)
@@ -282,7 +285,11 @@ func mapDataToField(m map[string]string, data []string, fields []string) {
 	var mx sync.Mutex
 
 	mx.Lock()
+	fmt.Println(fields)
+	fmt.Println(data)
+
 	for i, f := range fields {
+		fmt.Println(f, "->>>>>", data[i], "---->>", i)
 		m[f] = data[i]
 	}
 	mx.Unlock()

@@ -11,7 +11,7 @@ import (
 
 func AddDefaultHandlers(api *operations.VpAPI, h *Handlers) {
 	// default handle functions
-	api.GeneralGetAppUpdateHandler = general.GetAppUpdateHandlerFunc(h.GeneralGetAppUpdateHandler)
+	api.GeneralGetAppUpdateVersionHandler = general.GetAppUpdateVersionHandlerFunc(h.GeneralGetAppUpdateVersionHandler)
 	api.GeneralPostPingHandler = general.PostPingHandlerFunc(h.GeneralPostPingHandler)
 	api.GeneralPostPushHandler = general.PostPushHandlerFunc(h.GeneralPostPushHandler)
 	api.GeneralPostSmsHandler = general.PostSmsHandlerFunc(h.GeneralPostSmsHandler)

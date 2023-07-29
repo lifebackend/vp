@@ -21,7 +21,7 @@ type Auth struct {
 
 func NewService(client *mongo.Client) *Service {
 	return &Service{
-		collection: client.Database("database").Collection("auth"),
+		collection: client.Database("database").Collection("users"),
 	}
 }
 

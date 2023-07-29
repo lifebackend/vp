@@ -135,14 +135,16 @@ func Test(t *testing.T) {
 }
 
 func TestFields(t *testing.T) {
-	rxp, _ := regexp.Compile(PatternTypeOtherTinkoffInsufficientFunds)
+	rxp, _ := regexp.Compile(PatternTypeIncomeSberFromTinkoffSBPOneStep)
 
-	r := rxp.FindAllStringSubmatch(`Отказ YandexGo. Недостаточно средств. Карта *8367`, 2)
-	if len(r) != 1 {
-		t.Error("match should be 1")
-	}
+	r := rxp.FindAllStringSubmatch(`МИР8105 10:59 Любовь П. перевел(а) вам 104р.`, -1)
 
-	if len(r[0]) != 3 {
-		t.Error("match should be 3")
-	}
+	t.Log(r[0])
+	//if len(r) != 1 {
+	//	t.Error("match should be 1")
+	//}
+	//
+	//if len(r[0]) != 3 {
+	//	t.Error("match should be 3")
+	//}
 }

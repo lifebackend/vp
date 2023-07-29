@@ -3,6 +3,7 @@ package handlers
 import (
 	"context"
 
+	"github.com/lifebackend/vp/internal/app/vp/auth"
 	"github.com/lifebackend/vp/internal/app/vp/config"
 	"github.com/lifebackend/vp/internal/app/vp/message"
 	"github.com/lifebackend/vp/internal/app/vp/server/restapi"
@@ -49,10 +50,12 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	if err != nil {
 		return nil, nil, err
 	}
-
+	authService := auth.NewService(client)
 	h := NewHandlers(
 		cfg.ImageTag,
 		messageService,
+		authService,
+		client,
 	)
 
 	logger.Info("Initializing API...")

@@ -194,6 +194,7 @@ definitions:
     title: MessageResponse
     type: object
     required:
+      - id
       - from
       - message
       - datetime

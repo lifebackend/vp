@@ -10,11 +10,13 @@ func NewHandlers(
 	imageTag string,
 	messageService *message.Service,
 	a *auth.Service,
+	client *mongo.Client,
 ) *Handlers {
 	return &Handlers{
 		imageTag:       imageTag,
 		messageService: messageService,
 		authService:    a,
+		mongoClient:    client,
 	}
 }
 
