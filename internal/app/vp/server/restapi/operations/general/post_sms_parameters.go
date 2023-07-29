@@ -6,11 +6,15 @@ package general
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"io"
 	"net/http"
 
 	"github.com/go-openapi/errors"
+	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/lifebackend/vp/pkg/scope"
+
+	"github.com/lifebackend/vp/internal/app/vp/server/models"
 )
 
 // NewPostSmsParams creates a new PostSmsParams object
@@ -29,6 +33,12 @@ type PostSmsParams struct {
 	// HTTP Request Object
 	HTTPRequest *http.Request `json:"-"`
 
+	/*
+	  Required: true
+	  In: body
+	*/
+	Body *models.PostMessageRequest
+
 	// Body
 	RequestBody []byte
 
@@ -45,6 +55,28 @@ func (o *PostSmsParams) BindRequest(r *http.Request, route *middleware.MatchedRo
 
 	o.HTTPRequest = r
 
+	if runtime.HasBody(r) {
+		defer r.Body.Close()
+		var body models.PostMessageRequest
+		if err := route.Consumer.Consume(r.Body, &body); err != nil {
+			if err == io.EOF {
+				res = append(res, errors.Required("body", "body", ""))
+			} else {
+				res = append(res, errors.NewParseError("body", "body", "", err))
+			}
+		} else {
+			// validate body object
+			if err := body.Validate(route.Formats); err != nil {
+				res = append(res, err)
+			}
+
+			if len(res) == 0 {
+				o.Body = &body
+			}
+		}
+	} else {
+		res = append(res, errors.Required("body", "body", ""))
+	}
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}

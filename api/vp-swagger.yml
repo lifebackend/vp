@@ -78,7 +78,7 @@ paths:
         200:
           description: Successful Response
           schema:
-            $ref: "#/definitions/GetAppMessagesResponse"
+            $ref: "#/definitions/PostMessageResponse"
         500:
           description: Internal Server Error
           schema:
@@ -106,12 +106,14 @@ paths:
           schema:
             $ref: "#/definitions/ErrorMessage"
 
-  /app/update:
+  /app/update/{version}:
     get:
       tags:
         - general
       produces:
         - application/octet-stream
+      parameters:
+        - $ref: "#/parameters/Version"
       responses:
         200:
           description: Successful Response
@@ -230,7 +232,7 @@ definitions:
   PostMessageResponse:
     title: PostMessageResponse
     type: object
-    $ref: "#/definitions/MessageRequest"
+    $ref: "#/definitions/SuccessResponse"
   PostPingResponse:
     title: PostPingResponse
     type: object
@@ -285,5 +287,14 @@ definitions:
         title: Status
         type: boolean
         x-nullable: false
+
+parameters:
+  Version:
+    name: version
+    required: true
+    in: path
+    type: string
+    description: Version apk
+    x-nullable: false
 
 

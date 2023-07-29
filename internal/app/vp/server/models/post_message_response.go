@@ -17,17 +17,17 @@ import (
 //
 // swagger:model PostMessageResponse
 type PostMessageResponse struct {
-	MessageRequest
+	SuccessResponse
 }
 
 // UnmarshalJSON unmarshals this object from a JSON structure
 func (m *PostMessageResponse) UnmarshalJSON(raw []byte) error {
 	// AO0
-	var aO0 MessageRequest
+	var aO0 SuccessResponse
 	if err := swag.ReadJSON(raw, &aO0); err != nil {
 		return err
 	}
-	m.MessageRequest = aO0
+	m.SuccessResponse = aO0
 
 	return nil
 }
@@ -36,7 +36,7 @@ func (m *PostMessageResponse) UnmarshalJSON(raw []byte) error {
 func (m PostMessageResponse) MarshalJSON() ([]byte, error) {
 	_parts := make([][]byte, 0, 1)
 
-	aO0, err := swag.WriteJSON(m.MessageRequest)
+	aO0, err := swag.WriteJSON(m.SuccessResponse)
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +53,8 @@ func (m *PostMessageResponse) Validate(formats strfmt.Registry) error {
 func (m *PostMessageResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	// validation for a type composition with MessageRequest
-	if err := m.MessageRequest.ContextValidate(ctx, formats); err != nil {
+	// validation for a type composition with SuccessResponse
+	if err := m.SuccessResponse.ContextValidate(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 

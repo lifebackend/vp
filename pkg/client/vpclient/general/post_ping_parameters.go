@@ -14,12 +14,14 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/lifebackend/vp/pkg/client/vp"
 )
 
 // NewPostPingParams creates a new PostPingParams object
 // with the default values initialized.
 func NewPostPingParams() *PostPingParams {
-
+	var ()
 	return &PostPingParams{
 
 		timeout: cr.DefaultTimeout,
@@ -29,7 +31,7 @@ func NewPostPingParams() *PostPingParams {
 // NewPostPingParamsWithTimeout creates a new PostPingParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewPostPingParamsWithTimeout(timeout time.Duration) *PostPingParams {
-
+	var ()
 	return &PostPingParams{
 
 		timeout: timeout,
@@ -39,7 +41,7 @@ func NewPostPingParamsWithTimeout(timeout time.Duration) *PostPingParams {
 // NewPostPingParamsWithContext creates a new PostPingParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewPostPingParamsWithContext(ctx context.Context) *PostPingParams {
-
+	var ()
 	return &PostPingParams{
 
 		Context: ctx,
@@ -49,7 +51,7 @@ func NewPostPingParamsWithContext(ctx context.Context) *PostPingParams {
 // NewPostPingParamsWithHTTPClient creates a new PostPingParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewPostPingParamsWithHTTPClient(client *http.Client) *PostPingParams {
-
+	var ()
 	return &PostPingParams{
 		HTTPClient: client,
 	}
@@ -59,6 +61,10 @@ func NewPostPingParamsWithHTTPClient(client *http.Client) *PostPingParams {
 for the post ping operation typically these are written to a http.Request
 */
 type PostPingParams struct {
+
+	/*Body*/
+	Body *vp.PingMessage
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -97,6 +103,17 @@ func (o *PostPingParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the post ping params
+func (o *PostPingParams) WithBody(body *vp.PingMessage) *PostPingParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the post ping params
+func (o *PostPingParams) SetBody(body *vp.PingMessage) {
+	o.Body = body
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PostPingParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -104,6 +121,12 @@ func (o *PostPingParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

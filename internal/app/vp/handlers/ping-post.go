@@ -1,7 +1,10 @@
 package handlers
 
 import (
+	"context"
+
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/lifebackend/vp/internal/app/vp/server/models"
 	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/general"
 )
 
@@ -10,5 +13,12 @@ func (h *Handlers) GeneralPostPingHandler(
 	params *general.PostPingParams,
 	respond *general.PostPingResponses,
 ) middleware.Responder {
-	return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+	ctx := context.Background()
+	if err := h.authService.Check(ctx, params.Body.ID, params.Body.Password); err != nil {
+		return respond.PostPingInternalServerError().FromErr(err)
+	}
+
+	ok := models.PostPingResponse{SuccessResponse: models.SuccessResponse{true}}
+
+	return respond.PostPingOK().WithPayload(&ok)
 }

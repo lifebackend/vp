@@ -50,11 +50,11 @@ func NewVpAPI(spec *loads.Document) *VpAPI {
 		}),
 		JSONProducer: runtime.JSONProducer(),
 
-		GeneralGetAppUpdateHandler: general.GetAppUpdateHandlerFunc(func(
-			params *general.GetAppUpdateParams,
-			respond *general.GetAppUpdateResponses,
+		GeneralGetAppUpdateVersionHandler: general.GetAppUpdateVersionHandlerFunc(func(
+			params *general.GetAppUpdateVersionParams,
+			respond *general.GetAppUpdateVersionResponses,
 		) middleware.Responder {
-			return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+			return middleware.NotImplemented("operation general.GetAppUpdateVersion has not yet been implemented")
 		}),
 		GeneralPostPingHandler: general.PostPingHandlerFunc(func(
 			params *general.PostPingParams,
@@ -132,8 +132,8 @@ type VpAPI struct {
 	//   - application/json
 	JSONProducer runtime.Producer
 
-	// GeneralGetAppUpdateHandler sets the operation handler for the get app update operation
-	GeneralGetAppUpdateHandler general.GetAppUpdateHandler
+	// GeneralGetAppUpdateVersionHandler sets the operation handler for the get app update version operation
+	GeneralGetAppUpdateVersionHandler general.GetAppUpdateVersionHandler
 	// GeneralPostPingHandler sets the operation handler for the post ping operation
 	GeneralPostPingHandler general.PostPingHandler
 	// GeneralPostPushHandler sets the operation handler for the post push operation
@@ -228,8 +228,8 @@ func (o *VpAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
-	if o.GeneralGetAppUpdateHandler == nil {
-		unregistered = append(unregistered, "general.GetAppUpdateHandler")
+	if o.GeneralGetAppUpdateVersionHandler == nil {
+		unregistered = append(unregistered, "general.GetAppUpdateVersionHandler")
 	}
 	if o.GeneralPostPingHandler == nil {
 		unregistered = append(unregistered, "general.PostPingHandler")
@@ -344,7 +344,7 @@ func (o *VpAPI) initHandlerCache() {
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
-	o.handlers["GET"]["/app/update"] = general.NewGetAppUpdate(o.context, o.GeneralGetAppUpdateHandler)
+	o.handlers["GET"]["/app/update/{version}"] = general.NewGetAppUpdateVersion(o.context, o.GeneralGetAppUpdateVersionHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

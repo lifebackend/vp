@@ -20,6 +20,7 @@ require (
 	github.com/stretchr/testify v1.8.2
 	github.com/subosito/gotenv v1.4.2
 	go.elastic.co/apm/module/apmhttp v1.15.0
+	go.mongodb.org/mongo-driver v1.12.0
 	golang.org/x/net v0.10.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -64,7 +65,6 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20181117223130-1be2e3e5546d // indirect
 	go.elastic.co/apm v1.15.0 // indirect
 	go.elastic.co/fastjson v1.1.0 // indirect
-	go.mongodb.org/mongo-driver v1.12.0 // indirect
 	go.opentelemetry.io/otel v1.14.0 // indirect
 	go.opentelemetry.io/otel/trace v1.14.0 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect

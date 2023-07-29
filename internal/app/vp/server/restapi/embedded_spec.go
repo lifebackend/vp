@@ -31,7 +31,7 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Wallet API",
+    "title": "VP API",
     "version": "0.1.0"
   },
   "paths": {
@@ -107,13 +107,18 @@ func init() {
         }
       }
     },
-    "/app/update": {
+    "/app/update/{version}": {
       "get": {
         "produces": [
           "application/octet-stream"
         ],
         "tags": [
           "general"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Version"
+          }
         ],
         "responses": {
           "200": {
@@ -140,6 +145,16 @@ func init() {
         "tags": [
           "general"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PingMessage"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -163,6 +178,16 @@ func init() {
         ],
         "tags": [
           "general"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostMessageRequest"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -188,11 +213,21 @@ func init() {
         "tags": [
           "general"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostMessageRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "schema": {
-              "$ref": "#/definitions/GetAppMessagesResponse"
+              "$ref": "#/definitions/PostMessageResponse"
             }
           },
           "500": {
@@ -375,7 +410,7 @@ func init() {
     "PostMessageResponse": {
       "type": "object",
       "title": "PostMessageResponse",
-      "$ref": "#/definitions/MessageRequest"
+      "$ref": "#/definitions/SuccessResponse"
     },
     "PostPingResponse": {
       "type": "object",
@@ -395,6 +430,16 @@ func init() {
           "x-nullable": false
         }
       }
+    }
+  },
+  "parameters": {
+    "Version": {
+      "type": "string",
+      "x-nullable": false,
+      "description": "Version apk",
+      "name": "version",
+      "in": "path",
+      "required": true
     }
   }
 }`))
@@ -412,7 +457,7 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "title": "Wallet API",
+    "title": "VP API",
     "version": "0.1.0"
   },
   "paths": {
@@ -488,13 +533,23 @@ func init() {
         }
       }
     },
-    "/app/update": {
+    "/app/update/{version}": {
       "get": {
         "produces": [
           "application/octet-stream"
         ],
         "tags": [
           "general"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "x-nullable": false,
+            "description": "Version apk",
+            "name": "version",
+            "in": "path",
+            "required": true
+          }
         ],
         "responses": {
           "200": {
@@ -521,6 +576,16 @@ func init() {
         "tags": [
           "general"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PingMessage"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -544,6 +609,16 @@ func init() {
         ],
         "tags": [
           "general"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostMessageRequest"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -569,11 +644,21 @@ func init() {
         "tags": [
           "general"
         ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostMessageRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "schema": {
-              "$ref": "#/definitions/GetAppMessagesResponse"
+              "$ref": "#/definitions/PostMessageResponse"
             }
           },
           "500": {
@@ -756,7 +841,7 @@ func init() {
     "PostMessageResponse": {
       "type": "object",
       "title": "PostMessageResponse",
-      "$ref": "#/definitions/MessageRequest"
+      "$ref": "#/definitions/SuccessResponse"
     },
     "PostPingResponse": {
       "type": "object",
@@ -776,6 +861,16 @@ func init() {
           "x-nullable": false
         }
       }
+    }
+  },
+  "parameters": {
+    "Version": {
+      "type": "string",
+      "x-nullable": false,
+      "description": "Version apk",
+      "name": "version",
+      "in": "path",
+      "required": true
     }
   }
 }`))

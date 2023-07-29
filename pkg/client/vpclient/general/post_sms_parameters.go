@@ -14,12 +14,14 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/lifebackend/vp/pkg/client/vp"
 )
 
 // NewPostSmsParams creates a new PostSmsParams object
 // with the default values initialized.
 func NewPostSmsParams() *PostSmsParams {
-
+	var ()
 	return &PostSmsParams{
 
 		timeout: cr.DefaultTimeout,
@@ -29,7 +31,7 @@ func NewPostSmsParams() *PostSmsParams {
 // NewPostSmsParamsWithTimeout creates a new PostSmsParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewPostSmsParamsWithTimeout(timeout time.Duration) *PostSmsParams {
-
+	var ()
 	return &PostSmsParams{
 
 		timeout: timeout,
@@ -39,7 +41,7 @@ func NewPostSmsParamsWithTimeout(timeout time.Duration) *PostSmsParams {
 // NewPostSmsParamsWithContext creates a new PostSmsParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewPostSmsParamsWithContext(ctx context.Context) *PostSmsParams {
-
+	var ()
 	return &PostSmsParams{
 
 		Context: ctx,
@@ -49,7 +51,7 @@ func NewPostSmsParamsWithContext(ctx context.Context) *PostSmsParams {
 // NewPostSmsParamsWithHTTPClient creates a new PostSmsParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewPostSmsParamsWithHTTPClient(client *http.Client) *PostSmsParams {
-
+	var ()
 	return &PostSmsParams{
 		HTTPClient: client,
 	}
@@ -59,6 +61,10 @@ func NewPostSmsParamsWithHTTPClient(client *http.Client) *PostSmsParams {
 for the post sms operation typically these are written to a http.Request
 */
 type PostSmsParams struct {
+
+	/*Body*/
+	Body *vp.PostMessageRequest
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -97,6 +103,17 @@ func (o *PostSmsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the post sms params
+func (o *PostSmsParams) WithBody(body *vp.PostMessageRequest) *PostSmsParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the post sms params
+func (o *PostSmsParams) SetBody(body *vp.PostMessageRequest) {
+	o.Body = body
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PostSmsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -104,6 +121,12 @@ func (o *PostSmsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regis
 		return err
 	}
 	var res []error
+
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

@@ -14,12 +14,14 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/lifebackend/vp/pkg/client/vp"
 )
 
 // NewPostPushParams creates a new PostPushParams object
 // with the default values initialized.
 func NewPostPushParams() *PostPushParams {
-
+	var ()
 	return &PostPushParams{
 
 		timeout: cr.DefaultTimeout,
@@ -29,7 +31,7 @@ func NewPostPushParams() *PostPushParams {
 // NewPostPushParamsWithTimeout creates a new PostPushParams object
 // with the default values initialized, and the ability to set a timeout on a request
 func NewPostPushParamsWithTimeout(timeout time.Duration) *PostPushParams {
-
+	var ()
 	return &PostPushParams{
 
 		timeout: timeout,
@@ -39,7 +41,7 @@ func NewPostPushParamsWithTimeout(timeout time.Duration) *PostPushParams {
 // NewPostPushParamsWithContext creates a new PostPushParams object
 // with the default values initialized, and the ability to set a context for a request
 func NewPostPushParamsWithContext(ctx context.Context) *PostPushParams {
-
+	var ()
 	return &PostPushParams{
 
 		Context: ctx,
@@ -49,7 +51,7 @@ func NewPostPushParamsWithContext(ctx context.Context) *PostPushParams {
 // NewPostPushParamsWithHTTPClient creates a new PostPushParams object
 // with the default values initialized, and the ability to set a custom HTTPClient for a request
 func NewPostPushParamsWithHTTPClient(client *http.Client) *PostPushParams {
-
+	var ()
 	return &PostPushParams{
 		HTTPClient: client,
 	}
@@ -59,6 +61,10 @@ func NewPostPushParamsWithHTTPClient(client *http.Client) *PostPushParams {
 for the post push operation typically these are written to a http.Request
 */
 type PostPushParams struct {
+
+	/*Body*/
+	Body *vp.PostMessageRequest
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -97,6 +103,17 @@ func (o *PostPushParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithBody adds the body to the post push params
+func (o *PostPushParams) WithBody(body *vp.PostMessageRequest) *PostPushParams {
+	o.SetBody(body)
+	return o
+}
+
+// SetBody adds the body to the post push params
+func (o *PostPushParams) SetBody(body *vp.PostMessageRequest) {
+	o.Body = body
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *PostPushParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -104,6 +121,12 @@ func (o *PostPushParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.Body != nil {
+		if err := r.SetBodyParam(o.Body); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

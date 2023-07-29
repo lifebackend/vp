@@ -27,7 +27,7 @@ type PostSmsOK struct {
 	/*
 	  In: Body
 	*/
-	Payload models.GetAppMessagesResponse `json:"body,omitempty"`
+	Payload *models.PostMessageResponse `json:"body,omitempty"`
 }
 
 // NewPostSmsOKFunc is a type the create the response func
@@ -40,13 +40,13 @@ func NewPostSmsOK() *PostSmsOK {
 }
 
 // WithPayload adds the payload to the post sms o k response
-func (o *PostSmsOK) WithPayload(payload models.GetAppMessagesResponse) *PostSmsOK {
+func (o *PostSmsOK) WithPayload(payload *models.PostMessageResponse) *PostSmsOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the post sms o k response
-func (o *PostSmsOK) SetPayload(payload models.GetAppMessagesResponse) {
+func (o *PostSmsOK) SetPayload(payload *models.PostMessageResponse) {
 	o.Payload = payload
 }
 
@@ -54,14 +54,11 @@ func (o *PostSmsOK) SetPayload(payload models.GetAppMessagesResponse) {
 func (o *PostSmsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
 
 	rw.WriteHeader(200)
-	payload := o.Payload
-	if payload == nil {
-		// return empty array
-		payload = models.GetAppMessagesResponse{}
-	}
-
-	if err := producer.Produce(rw, payload); err != nil {
-		logrus.Panic(err) // let the recovery middleware deal with this
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			logrus.Panic(err) // let the recovery middleware deal with this
+		}
 	}
 }
 

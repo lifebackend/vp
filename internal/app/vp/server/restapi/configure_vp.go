@@ -54,7 +54,7 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 
 	/* default handlers declaration
 	   // default handle functions
-	   api.GeneralGetAppUpdateHandler = general.GetAppUpdateHandlerFunc(h.GeneralGetAppUpdateHandler)
+	   api.GeneralGetAppUpdateVersionHandler = general.GetAppUpdateVersionHandlerFunc(h.GeneralGetAppUpdateVersionHandler)
 	   api.GeneralPostPingHandler = general.PostPingHandlerFunc(h.GeneralPostPingHandler)
 	   api.GeneralPostPushHandler = general.PostPushHandlerFunc(h.GeneralPostPushHandler)
 	   api.GeneralPostSmsHandler = general.PostSmsHandlerFunc(h.GeneralPostSmsHandler)
@@ -65,13 +65,13 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 
 	// Default handlers
 
-	/* default handler for /app/update-GET
-	   // GeneralGetAppUpdateHandler Handler for GET /app/update
-	   func (h *Handlers) GeneralGetAppUpdateHandler (
-	       params *general.GetAppUpdateParams,
-	       respond *general.GetAppUpdateResponses,
+	/* default handler for /app/update/{version}-GET
+	   // GeneralGetAppUpdateVersionHandler Handler for GET /app/update/{version}
+	   func (h *Handlers) GeneralGetAppUpdateVersionHandler (
+	       params *general.GetAppUpdateVersionParams,
+	       respond *general.GetAppUpdateVersionResponses,
 	   ) middleware.Responder {
-	       return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+	       return middleware.NotImplemented("operation general.GetAppUpdateVersion has not yet been implemented")
 	   }
 	   default handler */
 
@@ -134,13 +134,13 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 	       return middleware.NotImplemented("operation health.GetReadinessProbe has not yet been implemented")
 	   }
 	   default handler */
-	// Handler for GET /app/update
-	if api.GeneralGetAppUpdateHandler == nil {
-		api.GeneralGetAppUpdateHandler = general.GetAppUpdateHandlerFunc(func(
-			params *general.GetAppUpdateParams,
-			respond *general.GetAppUpdateResponses,
+	// Handler for GET /app/update/{version}
+	if api.GeneralGetAppUpdateVersionHandler == nil {
+		api.GeneralGetAppUpdateVersionHandler = general.GetAppUpdateVersionHandlerFunc(func(
+			params *general.GetAppUpdateVersionParams,
+			respond *general.GetAppUpdateVersionResponses,
 		) middleware.Responder {
-			return middleware.NotImplemented("operation general.GetAppUpdate has not yet been implemented")
+			return middleware.NotImplemented("operation general.GetAppUpdateVersion has not yet been implemented")
 		})
 	}
 	// Handler for POST /ping
