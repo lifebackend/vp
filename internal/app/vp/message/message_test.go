@@ -5,6 +5,27 @@ import (
 	"testing"
 )
 
+func TestMustMessage(t *testing.T) {
+	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
+
+	if err != nil {
+		panic(err)
+	}
+
+	r := rxp.FindAllStringSubmatch(`VISA3200 22:08 Перевод 4580р от Екатерина И. Баланс: 20018.96р`, -1)
+
+	m := make(map[string]string)
+	f := getFieldsByType(TypeIncomeSberFromSber)
+	mapDataToField(m, r[0], f)
+
+	for i := 0; i < len(m); i++ {
+		if _, ok := m[f[i]]; !ok {
+			t.Error("undefined filed", TypeIncomeSberFromSber, f[i])
+		}
+	}
+
+}
+
 func Test(t *testing.T) {
 	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
 
@@ -140,11 +161,11 @@ func TestFields(t *testing.T) {
 	r := rxp.FindAllStringSubmatch(`МИР8105 10:59 Любовь П. перевел(а) вам 104р.`, -1)
 
 	t.Log(r[0])
-	//if len(r) != 1 {
-	//	t.Error("match should be 1")
-	//}
-	//
-	//if len(r[0]) != 3 {
-	//	t.Error("match should be 3")
-	//}
+	if len(r) != 1 {
+		t.Error("match should be 1")
+	}
+
+	if len(r[0]) != 5 {
+		t.Error("match should be 3", len(r[0]))
+	}
 }

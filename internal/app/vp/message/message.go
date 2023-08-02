@@ -47,13 +47,13 @@ const (
 
 	// Sber regexp
 
-	PatternTypeIncomeSberFromSber              = "^([A-Z]+)([0-9]+) ([0-9]{2}:[0-9]{2}) Перевод ([0-9.]+р) от ([0-9а-яА-Я ]+.) Баланс: ([0-9.]+р)$"
+	PatternTypeIncomeSberFromSber              = "^([A-Z]+[0-9]+) ([0-9]{2}:[0-9]{2}) Перевод ([0-9.]+р) от ([0-9а-яА-Я ]+.) Баланс: ([0-9.]+р)$"
 	PatternTypeIncomeSberFromTinkoffOneStep    = "^([a-zA-Z-0-9]+) ([0-9]{2}:[0-9]{2}) зачисление ([0-9.]+)р Тинькофф Банк Баланс: ([0-9.]+)р$"
 	PatternTypeIncomeSberFromTinkoffTwoStep    = "^[a-zA-Zа-яА-Я0-9 ]+ [0-9]{2}.[0-9]{2}.[0-9]{2} зачислен перевод ([0-9.]+)р из Тинькофф Банк от ([А-Яа-я ]+).$"
 	PatternTypeIncomeSberFromTinkoffSBPOneStep = `^([0-9А-Яa-zA-ZА-Я]+) ([0-9]{2}:[0-9]{2}) ([А-Яа-я ]+). перевел\(а\) вам ([0-9]+)р.$`
 	PatternTypeIncomeSberFromTinkoffSBPTwoStep = "^[a-zA-Z-0-9]+ [0-9]{2}:[0-9]{2} зачисление ([0-9.]+)р TINKOFF Баланс: ([0-9.]+)р$"
 	PatternTypeIncomeSberFromAlphaOneStep      = "^([a-zA-Z-0-9]+) ([0-9]{2}:[0-9]{2}) зачисление ([0-9.]+)р Альфа Банк Баланс: ([0-9.]+)р$"
-	PatternTypeIncomeSberFromAlphaTwoStep      = "^[a-zA-Zа-яА-Я0-9 ]+ [0-9]{2}.[0-9]{2}.[0-9]{2} зачислен перевод ([0-9.]+)р из Альфа Банк от ([А-Яа-я ]+).$"
+	PatternTypeIncomeSberFromAlphaTwoStep      = "^[a-zA-Zа-яА-Я0-9 ]+ [0-9]{2}.[0-9]{2}.[0-9]{2} зачислен перевод ([0-9.]+)р из Альфа Банк от ([А-Яа-я ]+).+$"
 
 	// Sber other
 
