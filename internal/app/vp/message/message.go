@@ -312,7 +312,7 @@ func getFieldsByType(tp string) []string {
 }
 
 func parseMessage(msg string) (string, map[string]string) {
-	msg = strings.ReplaceAll(msg, `\n`, "")
+	msg = strings.ReplaceAll(msg, "\n", "")
 	msg = strings.ReplaceAll(msg, "\u00a0", " ")
 	var mx sync.Mutex
 	m := make(map[string]string)
