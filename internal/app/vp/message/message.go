@@ -67,7 +67,7 @@ const (
 	// Tinkoff regexp
 
 	PatternTypeIncomeTinkoff     = "Пополнение, счет RUB. ([0-9]+) RUB. ([А-Яа-я .]+)?Доступно ([0-9. ]+) RUB"
-	PatternTypePushIncomeTinkoff = "Пополнение на ([0-9]+) ₽, счет RUB. ([А-Яа-я .]+)? Доступно ([0-9. ]+) ₽"
+	PatternTypePushIncomeTinkoff = "Пополнение на ([0-9]+) ₽, счет RUB. ([А-Яа-я .]+)?Доступно ([0-9. ]+) ₽"
 
 	// Tinkoff other
 
