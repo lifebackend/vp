@@ -16,12 +16,14 @@ func (h *Handlers) GeneralPostProxyMessageHandler(
 ) middleware.Responder {
 
 	ctx := context.Background()
-	if err := h.authService.Check(ctx, *params.Body.ID, params.HTTPRequest.Header.Get("x-api-key")); err != nil {
-		return respond.PostProxyMessageInternalServerError().FromErr(err)
-	}
-	err := h.messageService.Save(ctx, *params.Body.ID, params.Body.Address, strings.ToLower(params.Body.Action), params.Body.Body)
-	if err != nil {
-		return respond.PostProxyMessageInternalServerError().FromErr(err)
+	if params.Body.Action != "status" {
+		if err := h.authService.Check(ctx, *params.Body.ID, params.HTTPRequest.Header.Get("x-api-key")); err != nil {
+			return respond.PostProxyMessageInternalServerError().FromErr(err)
+		}
+		err := h.messageService.Save(ctx, *params.Body.ID, params.Body.Address, strings.ToLower(params.Body.Action), params.Body.Body)
+		if err != nil {
+			return respond.PostProxyMessageInternalServerError().FromErr(err)
+		}
 	}
 
 	ok := models.PostProxyMessagesResponse{models.ProxySuccessResponse{Result: 1}}
