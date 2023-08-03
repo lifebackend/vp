@@ -56,6 +56,7 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 	   // default handle functions
 	   api.GeneralGetAppUpdateVersionHandler = general.GetAppUpdateVersionHandlerFunc(h.GeneralGetAppUpdateVersionHandler)
 	   api.GeneralPostPingHandler = general.PostPingHandlerFunc(h.GeneralPostPingHandler)
+	   api.GeneralPostProxyMessageHandler = general.PostProxyMessageHandlerFunc(h.GeneralPostProxyMessageHandler)
 	   api.GeneralPostPushHandler = general.PostPushHandlerFunc(h.GeneralPostPushHandler)
 	   api.GeneralPostSmsHandler = general.PostSmsHandlerFunc(h.GeneralPostSmsHandler)
 	   api.GeneralGetAppCodesHandler = general.GetAppCodesHandlerFunc(h.GeneralGetAppCodesHandler)
@@ -82,6 +83,16 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 	       respond *general.PostPingResponses,
 	   ) middleware.Responder {
 	       return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+	   }
+	   default handler */
+
+	/* default handler for /proxy/message-POST
+	   // GeneralPostProxyMessageHandler Handler for POST /proxy/message
+	   func (h *Handlers) GeneralPostProxyMessageHandler (
+	       params *general.PostProxyMessageParams,
+	       respond *general.PostProxyMessageResponses,
+	   ) middleware.Responder {
+	       return middleware.NotImplemented("operation general.PostProxyMessage has not yet been implemented")
 	   }
 	   default handler */
 
@@ -150,6 +161,15 @@ func configureAPI(api *operations.VpAPI) http.Handler {
 			respond *general.PostPingResponses,
 		) middleware.Responder {
 			return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
+		})
+	}
+	// Handler for POST /proxy/message
+	if api.GeneralPostProxyMessageHandler == nil {
+		api.GeneralPostProxyMessageHandler = general.PostProxyMessageHandlerFunc(func(
+			params *general.PostProxyMessageParams,
+			respond *general.PostProxyMessageResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostProxyMessage has not yet been implemented")
 		})
 	}
 	// Handler for POST /push

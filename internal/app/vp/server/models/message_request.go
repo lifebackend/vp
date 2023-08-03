@@ -28,7 +28,8 @@ type MessageRequest struct {
 	From string `json:"from"`
 
 	// Device ID
-	ID string `json:"id,omitempty"`
+	// Required: true
+	ID *string `json:"id"`
 
 	// Message
 	// Required: true
@@ -48,6 +49,10 @@ func (m *MessageRequest) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFrom(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -77,6 +82,15 @@ func (m *MessageRequest) validateDatetime(formats strfmt.Registry) error {
 func (m *MessageRequest) validateFrom(formats strfmt.Registry) error {
 
 	if err := validate.RequiredString("from", "body", m.From); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *MessageRequest) validateID(formats strfmt.Registry) error {
+
+	if err := validate.Required("id", "body", m.ID); err != nil {
 		return err
 	}
 

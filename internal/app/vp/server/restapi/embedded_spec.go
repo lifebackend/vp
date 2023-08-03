@@ -171,6 +171,37 @@ func init() {
         }
       }
     },
+    "/proxy/message": {
+      "post": {
+        "tags": [
+          "general"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostProxyMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostProxyMessagesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
     "/push": {
       "post": {
         "produces": [
@@ -349,6 +380,7 @@ func init() {
       "type": "object",
       "title": "MessageResponse",
       "required": [
+        "id",
         "from",
         "message",
         "datetime",
@@ -416,6 +448,68 @@ func init() {
       "type": "object",
       "title": "PostPingResponse",
       "$ref": "#/definitions/SuccessResponse"
+    },
+    "PostProxyMessageRequest": {
+      "type": "object",
+      "title": "PostMessageRequest",
+      "$ref": "#/definitions/ProxyMessageRequest"
+    },
+    "PostProxyMessagesResponse": {
+      "type": "object",
+      "title": "GetAppCodesResponse",
+      "$ref": "#/definitions/ProxySuccessResponse"
+    },
+    "ProxyMessageRequest": {
+      "type": "object",
+      "title": "ProxyMessageRequest",
+      "required": [
+        "id",
+        "action",
+        "address",
+        "body",
+        "date"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "title": "Action (SMS or PUSH)",
+          "x-nullable": false
+        },
+        "address": {
+          "type": "string",
+          "title": "From",
+          "x-nullable": false
+        },
+        "body": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        },
+        "date": {
+          "type": "string",
+          "title": "Date",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string",
+          "title": "Device ID",
+          "x-nulable": false
+        }
+      }
+    },
+    "ProxySuccessResponse": {
+      "type": "object",
+      "title": "PingResponse",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "number",
+          "title": "Result",
+          "x-nullable": false
+        }
+      }
     },
     "SuccessResponse": {
       "type": "object",
@@ -602,6 +696,37 @@ func init() {
         }
       }
     },
+    "/proxy/message": {
+      "post": {
+        "tags": [
+          "general"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostProxyMessageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/PostProxyMessagesResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        }
+      }
+    },
     "/push": {
       "post": {
         "produces": [
@@ -780,6 +905,7 @@ func init() {
       "type": "object",
       "title": "MessageResponse",
       "required": [
+        "id",
         "from",
         "message",
         "datetime",
@@ -847,6 +973,68 @@ func init() {
       "type": "object",
       "title": "PostPingResponse",
       "$ref": "#/definitions/SuccessResponse"
+    },
+    "PostProxyMessageRequest": {
+      "type": "object",
+      "title": "PostMessageRequest",
+      "$ref": "#/definitions/ProxyMessageRequest"
+    },
+    "PostProxyMessagesResponse": {
+      "type": "object",
+      "title": "GetAppCodesResponse",
+      "$ref": "#/definitions/ProxySuccessResponse"
+    },
+    "ProxyMessageRequest": {
+      "type": "object",
+      "title": "ProxyMessageRequest",
+      "required": [
+        "id",
+        "action",
+        "address",
+        "body",
+        "date"
+      ],
+      "properties": {
+        "action": {
+          "type": "string",
+          "title": "Action (SMS or PUSH)",
+          "x-nullable": false
+        },
+        "address": {
+          "type": "string",
+          "title": "From",
+          "x-nullable": false
+        },
+        "body": {
+          "type": "string",
+          "title": "Message",
+          "x-nullable": false
+        },
+        "date": {
+          "type": "string",
+          "title": "Date",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string",
+          "title": "Device ID",
+          "x-nulable": false
+        }
+      }
+    },
+    "ProxySuccessResponse": {
+      "type": "object",
+      "title": "PingResponse",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "number",
+          "title": "Result",
+          "x-nullable": false
+        }
+      }
     },
     "SuccessResponse": {
       "type": "object",

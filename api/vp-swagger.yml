@@ -142,6 +142,25 @@ paths:
           description: Internal Server Error
           schema:
             $ref: "#/definitions/ErrorMessage"
+  /proxy/message:
+    post:
+      tags:
+        - general
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/PostProxyMessageRequest"
+          required: true
+      responses:
+        200:
+          description: Successful Response
+          schema:
+            $ref: "#/definitions/PostProxyMessagesResponse"
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: "#/definitions/ErrorMessage"
 definitions:
   AppMessage:
     title: AppMessage
@@ -190,6 +209,46 @@ definitions:
         title: Success
         type: boolean
         x-nullable: false
+  ProxySuccessResponse:
+    title: PingResponse
+    type: object
+    required:
+      - result
+    properties:
+      result:
+        title: Result
+        type: number
+        x-nullable: false
+  ProxyMessageRequest:
+    title: ProxyMessageRequest
+    type: object
+    required:
+      - id
+      - action
+      - address
+      - body
+      - date
+    properties:
+      id:
+        title: Device ID
+        type: string
+        x-nulable: false
+      address:
+        title: From
+        type: string
+        x-nullable: false
+      body:
+        title: Message
+        type: string
+        x-nullable: false
+      date:
+        title: Date
+        type: string
+        x-nullable: false
+      action:
+        title: Action (SMS or PUSH)
+        type: string
+        x-nullable: false
   MessageRequest:
     title: MessageResponse
     type: object
@@ -220,6 +279,15 @@ definitions:
         title: password
         type: string
         x-nullable: false
+  PostProxyMessagesResponse:
+    title: GetAppCodesResponse
+    type: object
+    $ref: "#/definitions/ProxySuccessResponse"
+
+  PostProxyMessageRequest:
+    title: PostMessageRequest
+    type: object
+    $ref: "#/definitions/ProxyMessageRequest"
 
   GetAppMessagesResponse:
     title: GetAppCodesResponse

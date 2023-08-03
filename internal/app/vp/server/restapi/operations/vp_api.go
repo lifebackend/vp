@@ -62,6 +62,12 @@ func NewVpAPI(spec *loads.Document) *VpAPI {
 		) middleware.Responder {
 			return middleware.NotImplemented("operation general.PostPing has not yet been implemented")
 		}),
+		GeneralPostProxyMessageHandler: general.PostProxyMessageHandlerFunc(func(
+			params *general.PostProxyMessageParams,
+			respond *general.PostProxyMessageResponses,
+		) middleware.Responder {
+			return middleware.NotImplemented("operation general.PostProxyMessage has not yet been implemented")
+		}),
 		GeneralPostPushHandler: general.PostPushHandlerFunc(func(
 			params *general.PostPushParams,
 			respond *general.PostPushResponses,
@@ -136,6 +142,8 @@ type VpAPI struct {
 	GeneralGetAppUpdateVersionHandler general.GetAppUpdateVersionHandler
 	// GeneralPostPingHandler sets the operation handler for the post ping operation
 	GeneralPostPingHandler general.PostPingHandler
+	// GeneralPostProxyMessageHandler sets the operation handler for the post proxy message operation
+	GeneralPostProxyMessageHandler general.PostProxyMessageHandler
 	// GeneralPostPushHandler sets the operation handler for the post push operation
 	GeneralPostPushHandler general.PostPushHandler
 	// GeneralPostSmsHandler sets the operation handler for the post sms operation
@@ -233,6 +241,9 @@ func (o *VpAPI) Validate() error {
 	}
 	if o.GeneralPostPingHandler == nil {
 		unregistered = append(unregistered, "general.PostPingHandler")
+	}
+	if o.GeneralPostProxyMessageHandler == nil {
+		unregistered = append(unregistered, "general.PostProxyMessageHandler")
 	}
 	if o.GeneralPostPushHandler == nil {
 		unregistered = append(unregistered, "general.PostPushHandler")
@@ -349,6 +360,10 @@ func (o *VpAPI) initHandlerCache() {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}
 	o.handlers["POST"]["/ping"] = general.NewPostPing(o.context, o.GeneralPostPingHandler)
+	if o.handlers["POST"] == nil {
+		o.handlers["POST"] = make(map[string]http.Handler)
+	}
+	o.handlers["POST"]["/proxy/message"] = general.NewPostProxyMessage(o.context, o.GeneralPostProxyMessageHandler)
 	if o.handlers["POST"] == nil {
 		o.handlers["POST"] = make(map[string]http.Handler)
 	}

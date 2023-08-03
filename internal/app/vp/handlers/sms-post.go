@@ -14,10 +14,10 @@ func (h *Handlers) GeneralPostSmsHandler(
 	respond *general.PostSmsResponses,
 ) middleware.Responder {
 	ctx := context.Background()
-	if err := h.authService.Check(ctx, params.Body.ID, params.Body.Password); err != nil {
+	if err := h.authService.Check(ctx, *params.Body.ID, params.Body.Password); err != nil {
 		return respond.PostSmsInternalServerError().FromErr(err)
 	}
-	err := h.messageService.Save(ctx, params.Body.ID, params.Body.From, "sms", params.Body.Message)
+	err := h.messageService.Save(ctx, *params.Body.ID, params.Body.From, "sms", params.Body.Message)
 	if err != nil {
 		return respond.PostSmsInternalServerError().FromErr(err)
 	}
