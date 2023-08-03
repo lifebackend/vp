@@ -34,8 +34,9 @@ const (
 
 	// Tinkoff Income
 
-	TypeIncomeTinkoff     = "TypeIncomeTinkoff"
-	TypePushIncomeTinkoff = "TypePushIncomeTinkoff"
+	TypeIncomeTinkoff        = "TypeIncomeTinkoff"
+	TypePushIncomeTinkoff    = "TypePushIncomeTinkoff"
+	TypePushAllIncomeTinkoff = "TypePushIncomeTinkoff"
 	// Tinkoff Other
 
 	TypeOtherTinkoffPaid              = "OtherTinkoffPaid"
@@ -66,8 +67,9 @@ const (
 
 	// Tinkoff regexp
 
-	PatternTypeIncomeTinkoff     = "Пополнение, счет RUB. ([0-9]+) RUB. ([А-Яа-я .]+)?Доступно ([0-9. ]+) RUB"
-	PatternTypePushIncomeTinkoff = "Пополнение на ([0-9]+) ₽, счет RUB. ([А-Яа-я .]+)?Доступно ([0-9. ]+) ₽"
+	PatternTypeIncomeTinkoff        = "^Пополнение, счет RUB. ([0-9]+) RUB. ([А-Яа-я .]+)?Доступно ([0-9. ]+) RUB$"
+	PatternTypePushIncomeTinkoff    = "^Пополнение на ([0-9]+) ₽, счет RUB. ([А-Яа-я .]+)? Доступно ([0-9. ]+) ₽$"
+	PatternTypePushAllIncomeTinkoff = "^Платеж на ([0-9]+) ₽, счет RUBБаланс([0-9. ]+) ₽$"
 
 	// Tinkoff other
 
@@ -211,6 +213,12 @@ func init() {
 		}
 		mapTypesRegExp[TypePushIncomeTinkoff] = rxp
 
+		rxp, err = regexp.Compile(PatternTypePushAllIncomeTinkoff)
+		if err != nil {
+			panic(err)
+		}
+		mapTypesRegExp[TypePushAllIncomeTinkoff] = rxp
+
 		steps = make(map[string]string)
 		steps[TypeIncomeSberFromTinkoffTwoStep] = PatternTypeIncomeSberFromTinkoffOneStep
 		steps[TypeIncomeSberFromTinkoffSBPTwoStep] = PatternTypeIncomeSberFromTinkoffSBPOneStep
@@ -240,6 +248,7 @@ func init() {
 		mapFields[TypeOtherTinkoffReplenishmentATM] = []string{"body", "amount", "balance"}
 		mapFields[TypeOtherTinkoffInsufficientFunds] = []string{"body", "from", "card"}
 		mapFields[TypePushIncomeTinkoff] = []string{"body", "amount", "from", "balance"}
+		mapFields[TypePushAllIncomeTinkoff] = []string{"body", "amount", "balance"}
 
 	})
 

@@ -125,6 +125,15 @@ func Test(t *testing.T) {
 	msg := `Пополнение на 100 ₽, счет RUB. Максим П.  \nДоступно 87 859.89 ₽`
 	msg = strings.ReplaceAll(msg, `\n`, "")
 	msg = strings.ReplaceAll(msg, "\u00a0", " ")
+	if ok := rxp.Match([]byte(msg)); !ok {
+		t.Error(ok)
+	}
+
+	rxp, err = regexp.Compile(PatternTypePushAllIncomeTinkoff)
+
+	msg = `Платеж на 500 ₽, счет RUB\nБаланс 87 409.89 ₽`
+	msg = strings.ReplaceAll(msg, `\n`, "")
+	msg = strings.ReplaceAll(msg, "\u00a0", " ")
 	t.Log(msg)
 	if ok := rxp.Match([]byte(msg)); !ok {
 		t.Error(ok)
