@@ -268,7 +268,7 @@ func NewService(db *mongo.Database, logger *logrus.Entry) *Service {
 func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMsg string, msg string) error {
 	t, m := s.parseMessage(msg)
 
-	if ok, t := isTwoStep(t); ok {
+	if ok, tp := isTwoStep(t); ok {
 		after := options.After
 		opt := options.FindOneAndUpdateOptions{
 			ReturnDocument: &after,
@@ -282,15 +282,19 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 			set = bson.M{"$set": bson.M{"msg.from": m["from"]}}
 		}
 
-		return s.collection.
+		r := s.collection.
 			FindOneAndUpdate(
 				ctx,
 				bson.D{
 					{"deviceID", deviceID},
 					{"typeMsg", typeMsg},
-					{"type", t},
+					{"type", tp},
 					{"msg.amount", m["amount"]},
-				}, set, &opt).Err()
+				}, set, &opt)
+
+		if r.Err() != mongo.ErrNoDocuments {
+			return r.Err()
+		}
 
 	}
 
