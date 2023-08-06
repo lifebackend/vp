@@ -14,6 +14,7 @@ type Config struct {
 	ExternalPort int    `env:"VP_EXTERNAL_PORT" envDefault:"9000"`
 	ExternalHost string `env:"VP_EXTERNAL_HOST"`
 	MongoDSN     string `env:"VP_DB_DSN" envDefault:"mongodb://backend-db:27017"`
+	MongoDB      string `env:"VP_MONGO_DB" envDefault:"database"`
 }
 
 func ReadConfig() (*Config, error) {

@@ -43,7 +43,7 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	if err != nil {
 		return nil, nil, err
 	}
-	db := client.Database("database")
+	db := client.Database(cfg.MongoDB)
 	collection := db
 
 	messageService := message.NewService(collection)
@@ -74,6 +74,7 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 
 	server := restapi.NewServerWithMiddleware(api, serviceName, logger, prometheusmetrics.NewMetrics())
 	server.Port = cfg.Port
+	server.Host = cfg.ExternalHost
 	server.EnabledListeners = []string{"http"}
 
 	return &Server{
