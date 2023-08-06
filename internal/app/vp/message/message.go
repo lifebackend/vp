@@ -10,6 +10,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 const (
@@ -220,9 +221,9 @@ func init() {
 		mapTypesRegExp[TypePushAllIncomeTinkoff] = rxp
 
 		steps = make(map[string]string)
-		steps[TypeIncomeSberFromTinkoffTwoStep] = PatternTypeIncomeSberFromTinkoffOneStep
-		steps[TypeIncomeSberFromTinkoffSBPTwoStep] = PatternTypeIncomeSberFromTinkoffSBPOneStep
-		steps[TypeIncomeSberFromAlphaTwoStep] = PatternTypeIncomeSberFromAlphaOneStep
+		steps[TypeIncomeSberFromTinkoffTwoStep] = TypeIncomeSberFromTinkoffOneStep
+		steps[TypeIncomeSberFromTinkoffSBPTwoStep] = TypeIncomeSberFromTinkoffSBPOneStep
+		steps[TypeIncomeSberFromAlphaTwoStep] = TypeIncomeSberFromAlphaOneStep
 
 		mapFields = make(map[string][]string)
 
@@ -258,8 +259,8 @@ type Service struct {
 	collection *mongo.Collection
 }
 
-func NewService(client *mongo.Client) *Service {
-	collection := client.Database("database").Collection("messages")
+func NewService(db *mongo.Database) *Service {
+	collection := db.Collection("messages")
 	return &Service{collection: collection}
 }
 
@@ -267,6 +268,19 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 	t, m := parseMessage(msg)
 
 	if ok, t := isTwoStep(t); ok {
+		after := options.After
+		opt := options.FindOneAndUpdateOptions{
+			ReturnDocument: &after,
+		}
+		var set bson.M
+		if _, ok := m["balance"]; ok {
+			set = bson.M{"$set": bson.M{"msg.balance": m["balance"]}}
+		}
+
+		if _, ok := m["from"]; ok {
+			set = bson.M{"$set": bson.M{"msg.from": m["from"]}}
+		}
+
 		return s.collection.
 			FindOneAndUpdate(
 				ctx,
@@ -274,10 +288,9 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 					{"deviceID", deviceID},
 					{"typeMsg", typeMsg},
 					{"type", t},
-					{"msg", bson.D{{"amount", m["amount"]}}},
-				},
-				bson.D{{"", ""}}).
-			Err()
+					{"msg.amount", m["amount"]},
+				}, set, &opt).Err()
+
 	}
 
 	b := bson.D{

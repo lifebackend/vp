@@ -1,10 +1,39 @@
 package message
 
 import (
+	"context"
 	"regexp"
 	"strings"
 	"testing"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
+func TestSaveMessageWithDB(t *testing.T) {
+	ctx := context.Background()
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+
+	if err != nil {
+		t.Skip()
+	}
+
+	db := client.Database("database_test")
+
+	s := NewService(db)
+	err = s.Save(ctx, "test", "test2", "sms", "MIR-8105 10:06 зачисление 100р Тинькофф Банк Баланс: 558.02р")
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = s.Save(ctx, "test", "test2", "sms", "МИР Сберкарта8105 26.07.23 зачислен перевод 100р из Тинькофф Банк от МАКСИМ ВИКТОРОВИЧ П.")
+
+	if err != nil {
+		t.Error(err)
+	}
+
+}
 
 func TestMustMessage(t *testing.T) {
 	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
@@ -138,6 +167,9 @@ func Test(t *testing.T) {
 	if ok := rxp.Match([]byte(msg)); !ok {
 		t.Error(ok)
 	}
+
+	rxp, err = regexp.Compile(PatternTypePushAllIncomeTinkoff)
+	msg = `МИР8105 10:59 Любовь П. перевел(а) вам 104р.`
 
 	// Tinkoff other
 

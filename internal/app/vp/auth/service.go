@@ -19,9 +19,9 @@ type Auth struct {
 	Password string `bson:"password"`
 }
 
-func NewService(client *mongo.Client) *Service {
+func NewService(db *mongo.Database) *Service {
 	return &Service{
-		collection: client.Database("database").Collection("users"),
+		collection: db.Collection("users"),
 	}
 }
 

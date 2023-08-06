@@ -38,19 +38,20 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 
 	logger.Info("Initializing services...")
 
-	//kafkaService, err := kafkasenderservice.NewKafkaSender(cfg)
-	//if err != nil {
-	//	return nil, nil, err
-	//}
-	//eventSendingService := eventsendingservice.NewEventSendingService(kafkaService, cfg.KafkaCoreTopic, serviceName)
-
 	client, err := mongo.Connect(scope.Ctx, options.Client().ApplyURI(cfg.MongoDSN))
-	messageService := message.NewService(client)
 
 	if err != nil {
 		return nil, nil, err
 	}
-	authService := auth.NewService(client)
+	db := client.Database("database")
+	collection := db
+
+	messageService := message.NewService(collection)
+
+	if err != nil {
+		return nil, nil, err
+	}
+	authService := auth.NewService(db)
 	h := NewHandlers(
 		cfg.ImageTag,
 		messageService,
