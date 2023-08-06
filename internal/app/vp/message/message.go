@@ -90,7 +90,6 @@ var (
 func init() {
 	var so sync.Once
 	so.Do(func() {
-
 		mapTypesRegExp = make(map[string]*regexp.Regexp)
 
 		rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
@@ -250,9 +249,7 @@ func init() {
 		mapFields[TypeOtherTinkoffInsufficientFunds] = []string{"body", "from", "card"}
 		mapFields[TypePushIncomeTinkoff] = []string{"body", "amount", "from", "balance"}
 		mapFields[TypePushAllIncomeTinkoff] = []string{"body", "amount", "balance"}
-
 	})
-
 }
 
 type Service struct {

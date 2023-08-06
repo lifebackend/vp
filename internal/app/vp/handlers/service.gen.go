@@ -19,5 +19,4 @@ func AddDefaultHandlers(api *operations.VpAPI, h *Handlers) {
 	api.GeneralGetAppCodesHandler = general.GetAppCodesHandlerFunc(h.GeneralGetAppCodesHandler)
 	api.HealthGetLivenessProbeHandler = health.GetLivenessProbeHandlerFunc(h.HealthGetLivenessProbeHandler)
 	api.HealthGetReadinessProbeHandler = health.GetReadinessProbeHandlerFunc(h.HealthGetReadinessProbeHandler)
-
 }

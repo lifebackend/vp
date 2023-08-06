@@ -14,7 +14,6 @@ import (
 func TestSaveMessageWithDB(t *testing.T) {
 	ctx := context.Background()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
-
 	if err != nil {
 		t.Skip()
 	}
@@ -34,12 +33,10 @@ func TestSaveMessageWithDB(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-
 }
 
 func Test(t *testing.T) {
 	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
-
 	if err != nil {
 		panic(err)
 	}
@@ -183,7 +180,6 @@ func Test(t *testing.T) {
 	if ok := rxp.Match([]byte(`Отказ YandexGo. Недостаточно средств. Карта *8367`)); !ok {
 		t.Error(ok)
 	}
-
 }
 
 func TestFields(t *testing.T) {

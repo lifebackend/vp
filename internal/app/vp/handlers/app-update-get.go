@@ -2,9 +2,8 @@ package handlers
 
 import (
 	"context"
-	"os"
-
 	"errors"
+	"os"
 
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/lifebackend/vp/internal/app/vp/server/restapi/operations/general"
@@ -25,7 +24,6 @@ func (h *Handlers) GeneralGetAppUpdateHandler(
 	err := h.mongoClient.Database("database").
 		Collection("version").
 		FindOne(context.Background(), filter).Decode(&version)
-
 	if err != nil {
 		return respond.GetAppUpdateVersionInternalServerError().FromErr(err)
 	}
@@ -35,7 +33,6 @@ func (h *Handlers) GeneralGetAppUpdateHandler(
 	}
 
 	f, err := os.Open(version.Path)
-
 	if err != nil {
 		return respond.GetAppUpdateVersionInternalServerError().FromErr(err)
 	}

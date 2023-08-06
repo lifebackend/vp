@@ -31,7 +31,6 @@ func (s *Service) Check(ctx context.Context, deviceID string, password string) e
 	var auth Auth
 
 	err := r.Decode(&auth)
-
 	if err != nil {
 		return err
 	}

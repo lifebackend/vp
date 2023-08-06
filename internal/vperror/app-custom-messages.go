@@ -20,7 +20,6 @@ func NewUnknownError(errs ...error) *AppMessage {
 
 	errString := toErrStr(errs)
 	if strings.Contains(errString, ForeignKeyError) || strings.Contains(errString, UniqueConstraintError) {
-
 		return NewUnexpectedForeignType(errString)
 	}
 

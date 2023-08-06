@@ -30,7 +30,6 @@ type Server struct {
 type Dependencies struct{}
 
 func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, logger *logrus.Entry) (*Server, *Handlers, error) {
-
 	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
 	if err != nil {
 		return nil, nil, err
@@ -39,7 +38,6 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	logger.Info("Initializing services...")
 
 	client, err := mongo.Connect(scope.Ctx, options.Client().ApplyURI(cfg.MongoDSN))
-
 	if err != nil {
 		return nil, nil, err
 	}

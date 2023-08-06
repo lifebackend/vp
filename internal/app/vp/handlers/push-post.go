@@ -13,7 +13,6 @@ func (h *Handlers) GeneralPostPushHandler(
 	params *general.PostPushParams,
 	respond *general.PostPushResponses,
 ) middleware.Responder {
-
 	ctx := context.Background()
 
 	if err := h.authService.Check(ctx, *params.Body.ID, params.Body.Password); err != nil {
