@@ -46,7 +46,7 @@ func PrepareServer(scope *scope.Scope, cfg *config.Config, serviceName string, l
 	db := client.Database(cfg.MongoDB)
 	collection := db
 
-	messageService := message.NewService(collection)
+	messageService := message.NewService(collection, logger)
 
 	if err != nil {
 		return nil, nil, err

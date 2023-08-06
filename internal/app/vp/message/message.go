@@ -2,12 +2,12 @@ package message
 
 import (
 	"context"
-	"fmt"
 	"regexp"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -257,15 +257,16 @@ func init() {
 
 type Service struct {
 	collection *mongo.Collection
+	logger     *logrus.Entry
 }
 
-func NewService(db *mongo.Database) *Service {
+func NewService(db *mongo.Database, logger *logrus.Entry) *Service {
 	collection := db.Collection("messages")
-	return &Service{collection: collection}
+	return &Service{collection: collection, logger: logger}
 }
 
 func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMsg string, msg string) error {
-	t, m := parseMessage(msg)
+	t, m := s.parseMessage(msg)
 
 	if ok, t := isTwoStep(t); ok {
 		after := options.After
@@ -312,15 +313,13 @@ func isTwoStep(tp string) (bool, string) {
 	return ok, stp
 }
 
-func mapDataToField(m map[string]string, data []string, fields []string) {
+func (s *Service) mapDataToField(m map[string]string, data []string, fields []string) {
 	var mx sync.Mutex
 
 	mx.Lock()
-	fmt.Println(fields)
-	fmt.Println(data)
 
 	for i, f := range fields {
-		fmt.Println(f, "->>>>>", data[i], "---->>", i)
+		s.logger.Info("map", "field:", f, "data:", data[i])
 		m[f] = data[i]
 	}
 	mx.Unlock()
@@ -333,9 +332,16 @@ func getFieldsByType(tp string) []string {
 	return nil
 }
 
-func parseMessage(msg string) (string, map[string]string) {
+// sanitize push message
+func prepareMessage(msg string) string {
 	msg = strings.ReplaceAll(msg, "\n", "")
 	msg = strings.ReplaceAll(msg, "\u00a0", " ")
+	return msg
+}
+
+func (s *Service) parseMessage(msg string) (string, map[string]string) {
+	msg = prepareMessage(msg)
+
 	var mx sync.Mutex
 	m := make(map[string]string)
 	for k, r := range mapTypesRegExp {
@@ -343,7 +349,7 @@ func parseMessage(msg string) (string, map[string]string) {
 			data := r.FindAllStringSubmatch(msg, -1)
 			fields := getFieldsByType(k)
 
-			mapDataToField(m, data[0], fields)
+			s.mapDataToField(m, data[0], fields)
 
 			return k, m
 		}

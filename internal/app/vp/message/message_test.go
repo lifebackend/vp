@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -19,8 +20,9 @@ func TestSaveMessageWithDB(t *testing.T) {
 	}
 
 	db := client.Database("database_test")
+	logger := logrus.NewEntry(logrus.StandardLogger())
 
-	s := NewService(db)
+	s := NewService(db, logger)
 	err = s.Save(ctx, "test", "test2", "sms", "MIR-8105 10:06 зачисление 100р Тинькофф Банк Баланс: 558.02р")
 
 	if err != nil {
