@@ -62,6 +62,89 @@ func (o *PostProxyMessageOK) WriteResponse(rw http.ResponseWriter, producer runt
 	}
 }
 
+// PostProxyMessageBadRequestCode is the HTTP code returned for type PostProxyMessageBadRequest
+const PostProxyMessageBadRequestCode int = 400
+
+/*PostProxyMessageBadRequest Successful Response
+
+swagger:response postProxyMessageBadRequest
+*/
+type PostProxyMessageBadRequest struct {
+
+	/*
+	  In: Body
+	*/
+	Payload *models.ErrorMessage `json:"body,omitempty"`
+}
+
+// NewPostProxyMessageBadRequestFunc is a type the create the response func
+type NewPostProxyMessageBadRequestFunc func() *PostProxyMessageBadRequest
+
+// NewPostProxyMessageBadRequest creates PostProxyMessageBadRequest with default headers values
+func NewPostProxyMessageBadRequest() *PostProxyMessageBadRequest {
+
+	return &PostProxyMessageBadRequest{}
+}
+
+// WithPayload adds the payload to the post proxy message bad request response
+func (o *PostProxyMessageBadRequest) WithPayload(payload *models.ErrorMessage) *PostProxyMessageBadRequest {
+	o.Payload = payload
+	return o
+}
+
+// WithErr adds the Error payload with a default code to the post proxy message bad request response
+func (o *PostProxyMessageBadRequest) FromErr(err error) *PostProxyMessageBadRequest {
+	type swaggerErr interface {
+		Plain() (code string, message string, attributes map[string]string)
+	}
+
+	if swaggerErr, ok := err.(swaggerErr); ok {
+		code, message, attributes := swaggerErr.Plain()
+
+		o.Payload = &models.ErrorMessage{
+			Code:       code,
+			Message:    message,
+			Attributes: attributes,
+		}
+		return o
+	}
+
+	o.Payload = &models.ErrorMessage{
+		Code:       "InternalServiceError",
+		Message:    err.Error(),
+		Attributes: nil,
+	}
+
+	return o
+}
+
+// WithError adds the Error payload to the post proxy message bad request response
+func (o *PostProxyMessageBadRequest) FromMessage(gaemblaErr *vperror.AppMessage) *PostProxyMessageBadRequest {
+	o.Payload = &models.ErrorMessage{
+		Attributes: gaemblaErr.Attributes,
+		Code:       gaemblaErr.Code,
+		Message:    gaemblaErr.Message,
+	}
+	return o
+}
+
+// SetPayload sets the payload to the post proxy message bad request response
+func (o *PostProxyMessageBadRequest) SetPayload(payload *models.ErrorMessage) {
+	o.Payload = payload
+}
+
+// WriteResponse to the client
+func (o *PostProxyMessageBadRequest) WriteResponse(rw http.ResponseWriter, producer runtime.Producer) {
+
+	rw.WriteHeader(400)
+	if o.Payload != nil {
+		payload := o.Payload
+		if err := producer.Produce(rw, payload); err != nil {
+			logrus.Panic(err) // let the recovery middleware deal with this
+		}
+	}
+}
+
 // PostProxyMessageInternalServerErrorCode is the HTTP code returned for type PostProxyMessageInternalServerError
 const PostProxyMessageInternalServerErrorCode int = 500
 

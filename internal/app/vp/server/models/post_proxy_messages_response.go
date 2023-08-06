@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// PostProxyMessagesResponse GetAppCodesResponse
+// PostProxyMessagesResponse PostProxyResponse
 //
 // swagger:model PostProxyMessagesResponse
 type PostProxyMessagesResponse struct {

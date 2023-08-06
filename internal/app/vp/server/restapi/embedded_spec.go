@@ -193,6 +193,12 @@ func init() {
               "$ref": "#/definitions/PostProxyMessagesResponse"
             }
           },
+          "400": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -456,7 +462,7 @@ func init() {
     },
     "PostProxyMessagesResponse": {
       "type": "object",
-      "title": "GetAppCodesResponse",
+      "title": "PostProxyResponse",
       "$ref": "#/definitions/ProxySuccessResponse"
     },
     "ProxyMessageRequest": {
@@ -718,6 +724,12 @@ func init() {
               "$ref": "#/definitions/PostProxyMessagesResponse"
             }
           },
+          "400": {
+            "description": "Successful Response",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -981,7 +993,7 @@ func init() {
     },
     "PostProxyMessagesResponse": {
       "type": "object",
-      "title": "GetAppCodesResponse",
+      "title": "PostProxyResponse",
       "$ref": "#/definitions/ProxySuccessResponse"
     },
     "ProxyMessageRequest": {

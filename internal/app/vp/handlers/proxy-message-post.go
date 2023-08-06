@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"errors"
 	"strings"
 
 	"github.com/go-openapi/runtime/middleware"
@@ -14,6 +15,9 @@ func (h *Handlers) GeneralPostProxyMessageHandler(
 	params *general.PostProxyMessageParams,
 	respond *general.PostProxyMessageResponses,
 ) middleware.Responder {
+	if params.Body.Body == "" {
+		return respond.PostProxyMessageBadRequest().FromErr(errors.New("no content provided for parsing"))
+	}
 
 	ctx := context.Background()
 	if params.Body.Action != "status" {

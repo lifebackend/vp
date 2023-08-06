@@ -20,12 +20,14 @@ import (
 func NewPostProxyMessageResponses() *PostProxyMessageResponses {
 	return &PostProxyMessageResponses{
 		PostProxyMessageOK:                  NewPostProxyMessageOK,
+		PostProxyMessageBadRequest:          NewPostProxyMessageBadRequest,
 		PostProxyMessageInternalServerError: NewPostProxyMessageInternalServerError,
 	}
 }
 
 type PostProxyMessageResponses struct {
 	PostProxyMessageOK                  NewPostProxyMessageOKFunc
+	PostProxyMessageBadRequest          NewPostProxyMessageBadRequestFunc
 	PostProxyMessageInternalServerError NewPostProxyMessageInternalServerErrorFunc
 }
 

@@ -15,6 +15,7 @@ func (h *Handlers) GeneralPostPushHandler(
 ) middleware.Responder {
 
 	ctx := context.Background()
+
 	if err := h.authService.Check(ctx, *params.Body.ID, params.Body.Password); err != nil {
 		return respond.PostPushInternalServerError().FromErr(err)
 	}

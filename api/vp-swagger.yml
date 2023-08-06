@@ -157,6 +157,10 @@ paths:
           description: Successful Response
           schema:
             $ref: "#/definitions/PostProxyMessagesResponse"
+        400:
+          description: Successful Response
+          schema:
+            $ref: "#/definitions/ErrorMessage"
         500:
           description: Internal Server Error
           schema:
@@ -280,7 +284,7 @@ definitions:
         type: string
         x-nullable: false
   PostProxyMessagesResponse:
-    title: GetAppCodesResponse
+    title: PostProxyResponse
     type: object
     $ref: "#/definitions/ProxySuccessResponse"
 
