@@ -37,27 +37,6 @@ func TestSaveMessageWithDB(t *testing.T) {
 
 }
 
-func TestMustMessage(t *testing.T) {
-	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
-
-	if err != nil {
-		panic(err)
-	}
-
-	r := rxp.FindAllStringSubmatch(`VISA3200 22:08 Перевод 4580р от Екатерина И. Баланс: 20018.96р`, -1)
-
-	m := make(map[string]string)
-	f := getFieldsByType(TypeIncomeSberFromSber)
-	mapDataToField(m, r[0], f)
-
-	for i := 0; i < len(m); i++ {
-		if _, ok := m[f[i]]; !ok {
-			t.Error("undefined filed", TypeIncomeSberFromSber, f[i])
-		}
-	}
-
-}
-
 func Test(t *testing.T) {
 	rxp, err := regexp.Compile(PatternTypeIncomeSberFromSber)
 
