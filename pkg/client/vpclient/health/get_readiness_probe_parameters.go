@@ -55,7 +55,8 @@ func NewGetReadinessProbeParamsWithHTTPClient(client *http.Client) *GetReadiness
 	}
 }
 
-/*GetReadinessProbeParams contains all the parameters to send to the API endpoint
+/*
+GetReadinessProbeParams contains all the parameters to send to the API endpoint
 for the get readiness probe operation typically these are written to a http.Request
 */
 type GetReadinessProbeParams struct {

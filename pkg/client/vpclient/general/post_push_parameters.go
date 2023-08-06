@@ -57,7 +57,8 @@ func NewPostPushParamsWithHTTPClient(client *http.Client) *PostPushParams {
 	}
 }
 
-/*PostPushParams contains all the parameters to send to the API endpoint
+/*
+PostPushParams contains all the parameters to send to the API endpoint
 for the post push operation typically these are written to a http.Request
 */
 type PostPushParams struct {

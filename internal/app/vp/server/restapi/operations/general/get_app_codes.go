@@ -47,12 +47,12 @@ func NewGetAppCodes(ctx *middleware.Context, handler GetAppCodesHandler) *GetApp
 	return &GetAppCodes{Context: ctx, Handler: handler}
 }
 
-/*GetAppCodes swagger:route GET /app-codes general getAppCodes
+/*
+GetAppCodes swagger:route GET /app-codes general getAppCodes
 
-Get List of Application Codes
+# Get List of Application Codes
 
 Get list of application codes
-
 */
 type GetAppCodes struct {
 	Context *middleware.Context

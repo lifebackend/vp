@@ -18,7 +18,8 @@ import (
 // PostProxyMessageOKCode is the HTTP code returned for type PostProxyMessageOK
 const PostProxyMessageOKCode int = 200
 
-/*PostProxyMessageOK Successful Response
+/*
+PostProxyMessageOK Successful Response
 
 swagger:response postProxyMessageOK
 */
@@ -65,7 +66,8 @@ func (o *PostProxyMessageOK) WriteResponse(rw http.ResponseWriter, producer runt
 // PostProxyMessageBadRequestCode is the HTTP code returned for type PostProxyMessageBadRequest
 const PostProxyMessageBadRequestCode int = 400
 
-/*PostProxyMessageBadRequest Successful Response
+/*
+PostProxyMessageBadRequest Successful Response
 
 swagger:response postProxyMessageBadRequest
 */
@@ -148,7 +150,8 @@ func (o *PostProxyMessageBadRequest) WriteResponse(rw http.ResponseWriter, produ
 // PostProxyMessageInternalServerErrorCode is the HTTP code returned for type PostProxyMessageInternalServerError
 const PostProxyMessageInternalServerErrorCode int = 500
 
-/*PostProxyMessageInternalServerError Internal Server Error
+/*
+PostProxyMessageInternalServerError Internal Server Error
 
 swagger:response postProxyMessageInternalServerError
 */

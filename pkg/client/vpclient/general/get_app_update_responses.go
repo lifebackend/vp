@@ -55,7 +55,8 @@ func NewGetAppUpdateOK(writer io.Writer) *GetAppUpdateOK {
 	}
 }
 
-/*GetAppUpdateOK handles this case with default header values.
+/*
+GetAppUpdateOK handles this case with default header values.
 
 Successful Response
 */
@@ -86,7 +87,8 @@ func NewGetAppUpdateInternalServerError() *GetAppUpdateInternalServerError {
 	return &GetAppUpdateInternalServerError{}
 }
 
-/*GetAppUpdateInternalServerError handles this case with default header values.
+/*
+GetAppUpdateInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

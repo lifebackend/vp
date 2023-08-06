@@ -55,7 +55,8 @@ func NewGetLivenessProbeParamsWithHTTPClient(client *http.Client) *GetLivenessPr
 	}
 }
 
-/*GetLivenessProbeParams contains all the parameters to send to the API endpoint
+/*
+GetLivenessProbeParams contains all the parameters to send to the API endpoint
 for the get liveness probe operation typically these are written to a http.Request
 */
 type GetLivenessProbeParams struct {

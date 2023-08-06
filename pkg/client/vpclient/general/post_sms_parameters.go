@@ -57,7 +57,8 @@ func NewPostSmsParamsWithHTTPClient(client *http.Client) *PostSmsParams {
 	}
 }
 
-/*PostSmsParams contains all the parameters to send to the API endpoint
+/*
+PostSmsParams contains all the parameters to send to the API endpoint
 for the post sms operation typically these are written to a http.Request
 */
 type PostSmsParams struct {

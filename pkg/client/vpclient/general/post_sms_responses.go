@@ -52,7 +52,8 @@ func NewPostSmsOK() *PostSmsOK {
 	return &PostSmsOK{}
 }
 
-/*PostSmsOK handles this case with default header values.
+/*
+PostSmsOK handles this case with default header values.
 
 Successful Response
 */
@@ -83,7 +84,8 @@ func NewPostSmsInternalServerError() *PostSmsInternalServerError {
 	return &PostSmsInternalServerError{}
 }
 
-/*PostSmsInternalServerError handles this case with default header values.
+/*
+PostSmsInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

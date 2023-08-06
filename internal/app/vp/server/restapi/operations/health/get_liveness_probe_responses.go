@@ -17,7 +17,8 @@ import (
 // GetLivenessProbeOKCode is the HTTP code returned for type GetLivenessProbeOK
 const GetLivenessProbeOKCode int = 200
 
-/*GetLivenessProbeOK Successful Response
+/*
+GetLivenessProbeOK Successful Response
 
 swagger:response getLivenessProbeOK
 */
@@ -64,7 +65,8 @@ func (o *GetLivenessProbeOK) WriteResponse(rw http.ResponseWriter, producer runt
 // GetLivenessProbeInternalServerErrorCode is the HTTP code returned for type GetLivenessProbeInternalServerError
 const GetLivenessProbeInternalServerErrorCode int = 500
 
-/*GetLivenessProbeInternalServerError Internal Server Error
+/*
+GetLivenessProbeInternalServerError Internal Server Error
 
 swagger:response getLivenessProbeInternalServerError
 */

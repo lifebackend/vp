@@ -47,12 +47,12 @@ func NewGetLivenessProbe(ctx *middleware.Context, handler GetLivenessProbeHandle
 	return &GetLivenessProbe{Context: ctx, Handler: handler}
 }
 
-/*GetLivenessProbe swagger:route GET /_livenessProbe health getLivenessProbe
+/*
+GetLivenessProbe swagger:route GET /_livenessProbe health getLivenessProbe
+
+# Liveness Probe
 
 Liveness Probe
-
-Liveness Probe
-
 */
 type GetLivenessProbe struct {
 	Context *middleware.Context

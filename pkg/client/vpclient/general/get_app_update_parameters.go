@@ -55,7 +55,8 @@ func NewGetAppUpdateParamsWithHTTPClient(client *http.Client) *GetAppUpdateParam
 	}
 }
 
-/*GetAppUpdateParams contains all the parameters to send to the API endpoint
+/*
+GetAppUpdateParams contains all the parameters to send to the API endpoint
 for the get app update operation typically these are written to a http.Request
 */
 type GetAppUpdateParams struct {

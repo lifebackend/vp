@@ -52,7 +52,8 @@ func NewPostPingOK() *PostPingOK {
 	return &PostPingOK{}
 }
 
-/*PostPingOK handles this case with default header values.
+/*
+PostPingOK handles this case with default header values.
 
 Successful Response
 */
@@ -85,7 +86,8 @@ func NewPostPingInternalServerError() *PostPingInternalServerError {
 	return &PostPingInternalServerError{}
 }
 
-/*PostPingInternalServerError handles this case with default header values.
+/*
+PostPingInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

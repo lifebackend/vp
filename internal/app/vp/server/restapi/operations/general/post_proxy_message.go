@@ -49,10 +49,10 @@ func NewPostProxyMessage(ctx *middleware.Context, handler PostProxyMessageHandle
 	return &PostProxyMessage{Context: ctx, Handler: handler}
 }
 
-/*PostProxyMessage swagger:route POST /proxy/message general postProxyMessage
+/*
+PostProxyMessage swagger:route POST /proxy/message general postProxyMessage
 
 PostProxyMessage post proxy message API
-
 */
 type PostProxyMessage struct {
 	Context *middleware.Context

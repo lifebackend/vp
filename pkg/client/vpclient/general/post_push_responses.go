@@ -52,7 +52,8 @@ func NewPostPushOK() *PostPushOK {
 	return &PostPushOK{}
 }
 
-/*PostPushOK handles this case with default header values.
+/*
+PostPushOK handles this case with default header values.
 
 Successful Response
 */
@@ -85,7 +86,8 @@ func NewPostPushInternalServerError() *PostPushInternalServerError {
 	return &PostPushInternalServerError{}
 }
 
-/*PostPushInternalServerError handles this case with default header values.
+/*
+PostPushInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

@@ -55,7 +55,8 @@ func NewGetAppCodesParamsWithHTTPClient(client *http.Client) *GetAppCodesParams 
 	}
 }
 
-/*GetAppCodesParams contains all the parameters to send to the API endpoint
+/*
+GetAppCodesParams contains all the parameters to send to the API endpoint
 for the get app codes operation typically these are written to a http.Request
 */
 type GetAppCodesParams struct {

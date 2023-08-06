@@ -49,7 +49,8 @@ func NewGetReadinessProbeOK() *GetReadinessProbeOK {
 	return &GetReadinessProbeOK{}
 }
 
-/*GetReadinessProbeOK handles this case with default header values.
+/*
+GetReadinessProbeOK handles this case with default header values.
 
 Successful Response
 */
@@ -70,7 +71,8 @@ func NewGetReadinessProbeInternalServerError() *GetReadinessProbeInternalServerE
 	return &GetReadinessProbeInternalServerError{}
 }
 
-/*GetReadinessProbeInternalServerError handles this case with default header values.
+/*
+GetReadinessProbeInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

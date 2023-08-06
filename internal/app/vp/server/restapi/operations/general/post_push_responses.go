@@ -18,7 +18,8 @@ import (
 // PostPushOKCode is the HTTP code returned for type PostPushOK
 const PostPushOKCode int = 200
 
-/*PostPushOK Successful Response
+/*
+PostPushOK Successful Response
 
 swagger:response postPushOK
 */
@@ -65,7 +66,8 @@ func (o *PostPushOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // PostPushInternalServerErrorCode is the HTTP code returned for type PostPushInternalServerError
 const PostPushInternalServerErrorCode int = 500
 
-/*PostPushInternalServerError Internal Server Error
+/*
+PostPushInternalServerError Internal Server Error
 
 swagger:response postPushInternalServerError
 */

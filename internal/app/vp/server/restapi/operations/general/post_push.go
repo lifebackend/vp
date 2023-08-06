@@ -47,10 +47,10 @@ func NewPostPush(ctx *middleware.Context, handler PostPushHandler) *PostPush {
 	return &PostPush{Context: ctx, Handler: handler}
 }
 
-/*PostPush swagger:route POST /push general postPush
+/*
+PostPush swagger:route POST /push general postPush
 
 PostPush post push API
-
 */
 type PostPush struct {
 	Context *middleware.Context

@@ -47,12 +47,12 @@ func NewGetReadinessProbe(ctx *middleware.Context, handler GetReadinessProbeHand
 	return &GetReadinessProbe{Context: ctx, Handler: handler}
 }
 
-/*GetReadinessProbe swagger:route GET /_readinessProbe health getReadinessProbe
+/*
+GetReadinessProbe swagger:route GET /_readinessProbe health getReadinessProbe
+
+# Readiness Probe
 
 Readiness Probe
-
-Readiness Probe
-
 */
 type GetReadinessProbe struct {
 	Context *middleware.Context

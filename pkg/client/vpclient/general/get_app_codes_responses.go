@@ -52,7 +52,8 @@ func NewGetAppCodesOK() *GetAppCodesOK {
 	return &GetAppCodesOK{}
 }
 
-/*GetAppCodesOK handles this case with default header values.
+/*
+GetAppCodesOK handles this case with default header values.
 
 Successful Response
 */
@@ -83,7 +84,8 @@ func NewGetAppCodesInternalServerError() *GetAppCodesInternalServerError {
 	return &GetAppCodesInternalServerError{}
 }
 
-/*GetAppCodesInternalServerError handles this case with default header values.
+/*
+GetAppCodesInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

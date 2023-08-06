@@ -18,7 +18,8 @@ import (
 // PostPingOKCode is the HTTP code returned for type PostPingOK
 const PostPingOKCode int = 200
 
-/*PostPingOK Successful Response
+/*
+PostPingOK Successful Response
 
 swagger:response postPingOK
 */
@@ -65,7 +66,8 @@ func (o *PostPingOK) WriteResponse(rw http.ResponseWriter, producer runtime.Prod
 // PostPingInternalServerErrorCode is the HTTP code returned for type PostPingInternalServerError
 const PostPingInternalServerErrorCode int = 500
 
-/*PostPingInternalServerError Internal Server Error
+/*
+PostPingInternalServerError Internal Server Error
 
 swagger:response postPingInternalServerError
 */

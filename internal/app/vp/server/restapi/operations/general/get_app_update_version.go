@@ -47,10 +47,10 @@ func NewGetAppUpdateVersion(ctx *middleware.Context, handler GetAppUpdateVersion
 	return &GetAppUpdateVersion{Context: ctx, Handler: handler}
 }
 
-/*GetAppUpdateVersion swagger:route GET /app/update/{version} general getAppUpdateVersion
+/*
+GetAppUpdateVersion swagger:route GET /app/update/{version} general getAppUpdateVersion
 
 GetAppUpdateVersion get app update version API
-
 */
 type GetAppUpdateVersion struct {
 	Context *middleware.Context

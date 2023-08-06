@@ -18,7 +18,8 @@ import (
 // PostSmsOKCode is the HTTP code returned for type PostSmsOK
 const PostSmsOKCode int = 200
 
-/*PostSmsOK Successful Response
+/*
+PostSmsOK Successful Response
 
 swagger:response postSmsOK
 */
@@ -65,7 +66,8 @@ func (o *PostSmsOK) WriteResponse(rw http.ResponseWriter, producer runtime.Produ
 // PostSmsInternalServerErrorCode is the HTTP code returned for type PostSmsInternalServerError
 const PostSmsInternalServerErrorCode int = 500
 
-/*PostSmsInternalServerError Internal Server Error
+/*
+PostSmsInternalServerError Internal Server Error
 
 swagger:response postSmsInternalServerError
 */

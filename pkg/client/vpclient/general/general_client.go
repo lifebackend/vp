@@ -44,7 +44,7 @@ type ClientService interface {
 }
 
 /*
-  GetAppUpdate get app update API
+GetAppUpdate get app update API
 */
 func (a *Client) GetAppUpdate(params *GetAppUpdateParams, writer io.Writer) (*GetAppUpdateOK, *GetAppUpdateInternalServerError, error) {
 	// TODO: Validate the params before sending
@@ -84,7 +84,7 @@ func (a *Client) GetAppUpdate(params *GetAppUpdateParams, writer io.Writer) (*Ge
 }
 
 /*
-  PostPing post ping API
+PostPing post ping API
 */
 func (a *Client) PostPing(params *PostPingParams) (*PostPingOK, *PostPingInternalServerError, error) {
 	// TODO: Validate the params before sending
@@ -124,7 +124,7 @@ func (a *Client) PostPing(params *PostPingParams) (*PostPingOK, *PostPingInterna
 }
 
 /*
-  PostPush post push API
+PostPush post push API
 */
 func (a *Client) PostPush(params *PostPushParams) (*PostPushOK, *PostPushInternalServerError, error) {
 	// TODO: Validate the params before sending
@@ -164,7 +164,7 @@ func (a *Client) PostPush(params *PostPushParams) (*PostPushOK, *PostPushInterna
 }
 
 /*
-  PostSms post sms API
+PostSms post sms API
 */
 func (a *Client) PostSms(params *PostSmsParams) (*PostSmsOK, *PostSmsInternalServerError, error) {
 	// TODO: Validate the params before sending
@@ -204,9 +204,9 @@ func (a *Client) PostSms(params *PostSmsParams) (*PostSmsOK, *PostSmsInternalSer
 }
 
 /*
-  GetAppCodes gets list of application codes
+GetAppCodes gets list of application codes
 
-  Get list of application codes
+Get list of application codes
 */
 func (a *Client) GetAppCodes(params *GetAppCodesParams) (*GetAppCodesOK, *GetAppCodesInternalServerError, error) {
 	// TODO: Validate the params before sending

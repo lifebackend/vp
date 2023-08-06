@@ -57,7 +57,8 @@ func NewPostPingParamsWithHTTPClient(client *http.Client) *PostPingParams {
 	}
 }
 
-/*PostPingParams contains all the parameters to send to the API endpoint
+/*
+PostPingParams contains all the parameters to send to the API endpoint
 for the post ping operation typically these are written to a http.Request
 */
 type PostPingParams struct {

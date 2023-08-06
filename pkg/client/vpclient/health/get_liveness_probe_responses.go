@@ -52,7 +52,8 @@ func NewGetLivenessProbeOK() *GetLivenessProbeOK {
 	return &GetLivenessProbeOK{}
 }
 
-/*GetLivenessProbeOK handles this case with default header values.
+/*
+GetLivenessProbeOK handles this case with default header values.
 
 Successful Response
 */
@@ -85,7 +86,8 @@ func NewGetLivenessProbeInternalServerError() *GetLivenessProbeInternalServerErr
 	return &GetLivenessProbeInternalServerError{}
 }
 
-/*GetLivenessProbeInternalServerError handles this case with default header values.
+/*
+GetLivenessProbeInternalServerError handles this case with default header values.
 
 Internal Server Error
 */

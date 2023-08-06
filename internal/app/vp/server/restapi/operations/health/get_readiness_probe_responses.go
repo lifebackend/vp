@@ -14,7 +14,8 @@ import (
 // GetReadinessProbeOKCode is the HTTP code returned for type GetReadinessProbeOK
 const GetReadinessProbeOKCode int = 200
 
-/*GetReadinessProbeOK Successful Response
+/*
+GetReadinessProbeOK Successful Response
 
 swagger:response getReadinessProbeOK
 */
@@ -41,7 +42,8 @@ func (o *GetReadinessProbeOK) WriteResponse(rw http.ResponseWriter, producer run
 // GetReadinessProbeInternalServerErrorCode is the HTTP code returned for type GetReadinessProbeInternalServerError
 const GetReadinessProbeInternalServerErrorCode int = 500
 
-/*GetReadinessProbeInternalServerError Internal Server Error
+/*
+GetReadinessProbeInternalServerError Internal Server Error
 
 swagger:response getReadinessProbeInternalServerError
 */

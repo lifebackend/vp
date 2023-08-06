@@ -37,9 +37,9 @@ type ClientService interface {
 }
 
 /*
-  GetLivenessProbe livenesses probe
+GetLivenessProbe livenesses probe
 
-  Liveness Probe
+Liveness Probe
 */
 func (a *Client) GetLivenessProbe(params *GetLivenessProbeParams) (*GetLivenessProbeOK, *GetLivenessProbeInternalServerError, error) {
 	// TODO: Validate the params before sending
@@ -79,9 +79,9 @@ func (a *Client) GetLivenessProbe(params *GetLivenessProbeParams) (*GetLivenessP
 }
 
 /*
-  GetReadinessProbe readinesses probe
+GetReadinessProbe readinesses probe
 
-  Readiness Probe
+Readiness Probe
 */
 func (a *Client) GetReadinessProbe(params *GetReadinessProbeParams) (*GetReadinessProbeOK, *GetReadinessProbeInternalServerError, error) {
 	// TODO: Validate the params before sending

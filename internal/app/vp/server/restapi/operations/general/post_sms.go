@@ -47,10 +47,10 @@ func NewPostSms(ctx *middleware.Context, handler PostSmsHandler) *PostSms {
 	return &PostSms{Context: ctx, Handler: handler}
 }
 
-/*PostSms swagger:route POST /sms general postSms
+/*
+PostSms swagger:route POST /sms general postSms
 
 PostSms post sms API
-
 */
 type PostSms struct {
 	Context *middleware.Context

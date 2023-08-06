@@ -19,7 +19,8 @@ import (
 // GetAppUpdateVersionOKCode is the HTTP code returned for type GetAppUpdateVersionOK
 const GetAppUpdateVersionOKCode int = 200
 
-/*GetAppUpdateVersionOK Successful Response
+/*
+GetAppUpdateVersionOK Successful Response
 
 swagger:response getAppUpdateVersionOK
 */
@@ -64,7 +65,8 @@ func (o *GetAppUpdateVersionOK) WriteResponse(rw http.ResponseWriter, producer r
 // GetAppUpdateVersionInternalServerErrorCode is the HTTP code returned for type GetAppUpdateVersionInternalServerError
 const GetAppUpdateVersionInternalServerErrorCode int = 500
 
-/*GetAppUpdateVersionInternalServerError Internal Server Error
+/*
+GetAppUpdateVersionInternalServerError Internal Server Error
 
 swagger:response getAppUpdateVersionInternalServerError
 */

@@ -2,20 +2,20 @@
 
 // Package restapi VP API
 //
-//  Schemes:
-//    http
-//    https
-//  Host: localhost
-//  BasePath: /
-//  Version: 0.1.0
+//	Schemes:
+//	  http
+//	  https
+//	Host: localhost
+//	BasePath: /
+//	Version: 0.1.0
 //
-//  Consumes:
-//    - application/json
+//	Consumes:
+//	  - application/json
 //
-//  Produces:
-//    - application/octet-stream
-//    - text/html
-//    - application/json
+//	Produces:
+//	  - application/octet-stream
+//	  - text/html
+//	  - application/json
 //
 // swagger:meta
 package restapi

@@ -18,7 +18,8 @@ import (
 // GetAppCodesOKCode is the HTTP code returned for type GetAppCodesOK
 const GetAppCodesOKCode int = 200
 
-/*GetAppCodesOK Successful Response
+/*
+GetAppCodesOK Successful Response
 
 swagger:response getAppCodesOK
 */
@@ -68,7 +69,8 @@ func (o *GetAppCodesOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 // GetAppCodesInternalServerErrorCode is the HTTP code returned for type GetAppCodesInternalServerError
 const GetAppCodesInternalServerErrorCode int = 500
 
-/*GetAppCodesInternalServerError Internal Server Error
+/*
+GetAppCodesInternalServerError Internal Server Error
 
 swagger:response getAppCodesInternalServerError
 */
