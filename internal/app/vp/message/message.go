@@ -38,7 +38,7 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 		opt := options.FindOneAndUpdateOptions{
 			ReturnDocument: &after,
 		}
-		var set bson.M
+		set := bson.M{}
 		if _, ok := m["balance"]; ok {
 			set = bson.M{"$set": bson.M{"msg.balance": m["balance"]}}
 		}
