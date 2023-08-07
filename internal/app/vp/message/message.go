@@ -47,7 +47,7 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 			set = bson.M{"$set": bson.M{"msg.from": m["from"]}}
 		}
 
-		r := s.collection.
+		err := s.collection.
 			FindOneAndUpdate(
 				ctx,
 				bson.D{
@@ -55,10 +55,10 @@ func (s *Service) Save(ctx context.Context, deviceID string, from string, typeMs
 					{"typeMsg", typeMsg},
 					{"type", tp},
 					{"msg.amount", m["amount"]},
-				}, set, &opt)
+				}, set, &opt).Err()
 
-		if !errors.Is(r.Err(), mongo.ErrNoDocuments) {
-			return r.Err()
+		if !errors.Is(err, mongo.ErrNoDocuments) {
+			return err
 		}
 
 	}
